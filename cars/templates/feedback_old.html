@@ -1,0 +1,88 @@
+{% load static %}
+
+<section class="form-feedback">
+    <div class="contacts">
+        <div class="row h-100">
+            <div class="form-contact-click col-xl-7 col-lg-6 col-12">
+                <div class="contact-body d-flex align-items-start flex-column h-100">
+                    <div class="mb-lg-auto w-100 contacts-info-text">
+                        <h2 style="color: #F3F3F3 !important;">Контактная информация</h2>
+                        <div class="gray-text text-start">
+                            Оставьте свою заявку и наш менеджер свяжется с Вами для уточнения деталей.
+                        </div>
+                    </div>
+                    <div class="contacts-info-click">
+                        <div class="row row-cols-sm-2 row-cols-1 align-items-center">
+                            <div class="col-xl-4 col order-sm-6 order-6">
+                                <p>Позвонить</p>
+                                <a href="tel:88005501720">8 800 550 17 20</a>
+								<a style="margin-left: 7px;" target="_blank" href="https://wa.me/79294201720?text=Здравствуйте!%20Посчитайте%20пожалуйста%20автомобиль">
+									<svg style="width: 24px;" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M8.502 0h-.004C3.81 0 0 3.812 0 8.5c0 1.86.6 3.583 1.618 4.982L.558 16.64l3.268-1.045A8.426 8.426 0 0 0 8.502 17C13.19 17 17 13.187 17 8.5 17 3.813 13.189 0 8.502 0z" fill="#4CAF50"></path>
+									<path d="M13.45 12.002c-.206.58-1.02 1.06-1.67 1.2-.443.094-1.023.17-2.976-.64-2.498-1.035-4.107-3.573-4.232-3.738-.12-.165-1.01-1.344-1.01-2.564s.62-1.813.87-2.068c.205-.21.544-.305.869-.305.105 0 .2.005.284.01.25.01.376.025.54.419.205.494.705 1.714.764 1.84.06.125.121.295.036.46-.08.17-.15.245-.275.39-.125.144-.244.254-.37.41-.114.134-.244.279-.1.528.145.245.644 1.06 1.38 1.714.948.845 1.718 1.115 1.993 1.23.205.085.45.064.6-.095.19-.205.424-.545.663-.88.17-.24.385-.27.61-.185.23.08 1.444.68 1.694.805s.414.184.475.29c.06.105.06.599-.146 1.18z" fill="#FAFAFA"></path>
+									</svg>
+								</a>
+                            </div>
+                            <div class="col-xl-8 col order-sm-1 order-3 inner-links">
+                                <a href="https://2gis.ru/vladivostok/inside/3519072864043713/firm/70000001089263459?m=131.89686%2C43.130451%2F16" target="_blank" style="font-weight: 400;">
+                                    <img src="{%static 'img/social/gis.png' %}" alt="icon">
+                                    Мы на 2гис
+                                </a>
+                            </div>
+                            <div class="col-xl-4 col order-sm-2 order-1">
+                                <p>Написать</p>
+                                <a href="mailto:autocenter25.corp@gmail.com">autocenter25.corp@gmail.com</a>
+                            </div>
+                            <div class="col-xl-8 col order-sm-3 order-4 inner-links">
+                                <a href="https://yandex.ru/profile/86796260610" target="_blank" style="font-weight: 400;">
+                                    <img src="{%static 'img/social/ya.png' %}" alt="icon">
+                                    Яндекс.Карты
+                                </a>
+                            </div>
+                            <div class="col-xl-4 col order-sm-4 order-1">
+                                <p>Адрес</p>
+                                <a href="https://2gis.ru/vladivostok/inside/3519072864043713/firm/70000001089263459?m=131.89686%2C43.130451%2F16" target="_blank">г. Владивосток<br>ул. Океанский пр-т 70в, оф. 18</a>
+                            </div>
+                            <div class="col-xl-8 col order-sm-5 order-5 inner-links">
+                                <a href="https://www.vl.ru/autocenter" target="_blank" style="font-weight: 400;">
+                                    <img src="{%static 'img/social/vl.png' %}" alt="icon">
+                                    VL справочник
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-wp col-xl-5 col-lg-6 col-12 h-100"  style="background: #fff; border-radius: 20px 20px 0px 0px;">
+                <div class="">
+                    <h5>Оставить заявку</h5>
+                    <form id="feedback-form-modal" class="feedback-form-form" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <label>Имя</label>
+                                {{feedbackForm.name}}
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <label>Телефон</label>
+                                {{feedbackForm.number}}
+                            </div>
+                            <div class="col-12">
+                                <label>Уточните свой вопрос</label>
+                                {{feedbackForm.message}}
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" onclick="ym(97653553,'reachGoal','YM-form'); return true;">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="feedback-form-annotation">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
