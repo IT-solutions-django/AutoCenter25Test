@@ -1,0 +1,146 @@
+{
+  "table_settings": {
+    "stats": {"commission": 0, "currency": "jpy"},
+    "china": {"commission": 0, "currency": "cny"},
+    "main": {"commission": 0, "currency": "krw"}
+  },
+  "car_tof": [
+    {"price_interval": [0, 200000], "tof": 775},
+    {"price_interval": [200000, 450000], "tof": 1550},
+    {"price_interval": [450000, 1200000], "tof": 3100},
+    {"price_interval": [1200000, 2700000], "tof": 8530},
+    {"price_interval": [2700000, 4200000], "tof": 12000},
+    {"price_interval": [4200000, 5500000], "tof": 15550},
+    {"price_interval": [5500000, 7000000], "tof": 20000},
+    {"price_interval": [7000000, 8000000], "tof": 23000},
+    {"price_interval": [8000000, 9000000], "tof": 25000},
+    {"price_interval": [9000000, 10000000], "tof": 27000},
+    {"price_interval": [10000000, "Infinity"], "tof": 30000}
+  ],
+  "new_cars_duty": [
+    {
+        "price_interval": [0, 8500],
+        "multiplier": 0.54,
+        "min_by_eng_v": 2.5
+    },
+    {
+        "price_interval": [8500, 16700],
+        "multiplier": 0.48,
+        "min_by_eng_v": 3.5
+    },
+    {
+        "price_interval": [16700, 42300],
+        "multiplier": 0.48,
+        "min_by_eng_v": 5.5
+    },
+    {
+        "price_interval": [42300, 84500],
+        "multiplier": 0.48,
+        "min_by_eng_v": 7.5
+    },
+    {
+        "price_interval": [84500, 169000],
+        "multiplier": 0.48,
+        "min_by_eng_v": 15
+    },
+    {
+        "price_interval": [169000, "Infinity"],
+        "multiplier": 0.48,
+        "min_by_eng_v": 20
+    }
+  ],
+  "old_cars_duty": [
+    {
+        "volume_interval": [0, 1000],
+        "multiplier": 1.5,
+        "age_interval": [3, 5]
+    },
+    {
+        "volume_interval": [1000, 1500],
+        "multiplier": 1.7,
+        "age_interval": [3, 5]
+    },
+    {
+        "volume_interval": [1500, 1800],
+        "multiplier": 2.5,
+        "age_interval": [3, 5]
+    },
+    {
+        "volume_interval": [1800, 2300],
+        "multiplier": 2.7,
+        "age_interval": [3, 5]
+    },
+    {
+        "volume_interval": [2300, 3000],
+        "multiplier": 3,
+        "age_interval": [3, 5]
+    },
+    {
+        "volume_interval": [3000, "Infinity"],
+        "multiplier": 3.6,
+        "age_interval": [3, 5]
+    },
+    {
+        "volume_interval": [0, 1000],
+        "multiplier": 3,
+        "age_interval": [5, "Infinity"]
+    },
+    {
+        "volume_interval": [1000, 1500],
+        "multiplier": 3.2,
+        "age_interval": [5, "Infinity"]
+    },
+    {
+        "volume_interval": [1500, 1800],
+        "multiplier": 3.5,
+        "age_interval": [5, "Infinity"]
+    },
+    {
+        "volume_interval": [1800, 2300],
+        "multiplier": 4.8,
+        "age_interval": [5, "Infinity"]
+    },
+    {
+        "volume_interval": [2300, 3000],
+        "multiplier": 5,
+        "age_interval": [5, "Infinity"]
+    },
+    {
+        "volume_interval": [3000, "Infinity"],
+        "multiplier": 5.7,
+        "age_interval": [5, "Infinity"]
+    }
+  ],
+  "cars_yts": [
+    {
+        "age_interval": [0, 3],
+        "volume_interval": [3500, "Infinity"],
+        "yts": 2285200
+    },
+    {
+        "age_interval": [0, 3],
+        "volume_interval": [3000, 3500],
+        "yts": 1794600
+    },
+    {
+        "age_interval": [0, 3],
+        "volume_interval": [0, 3000],
+        "yts": 3400
+    },
+    {
+        "age_interval": [3, "Infinity"],
+        "volume_interval": [3500, "Infinity"],
+        "yts": 3004000
+    },
+    {
+        "age_interval": [3, "Infinity"],
+        "volume_interval": [3000, 3500],
+        "yts": 2747200
+    },
+    {
+        "age_interval": [3, "Infinity"],
+        "volume_interval": [0, 3000],
+        "yts": 5200
+    }
+  ]
+}

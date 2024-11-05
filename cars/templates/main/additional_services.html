@@ -1,0 +1,348 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load intspace %}
+{% block content %}
+
+<div data-aos="fade-up">
+  <section class="welcome">
+    <div class="banner">
+      <div class="auto-selection" id="auto-selection">
+        <div class="row">
+
+          <div class="d-xl-none d-inline-block order-1">
+            <div class="col-12">
+              <h2>Автоподбор</h2>
+            </div>
+            <div class="col-12 gray-text text-start mb-4">
+              Качестенный автоподбор и осмотр с независимой оценкой.
+            </div>
+          </div>
+
+          <div class="col-xxl-7 col-xl-6 col-12 order-xl-1 order-3">
+            <div class="d-xl-inline-block d-none">
+              <div class="col-12">
+                <h2>
+                  Автоподбор
+                </h2>
+              </div>
+              <div class="col-12 gray-text text-start mb-4">
+                Качестенный автоподбор и осмотр с независимой оценкой.
+              </div>
+            </div>
+
+            <div class="check-auto-selection row">
+              <div class="col-md-6 col-12">
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Фото и видео отчет кузова с и пользованием толщиномера, салона, моторного отсека и днища автомобиля</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Диагностика сканером</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Тест-драйв</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Запрос и проверка аукционного листа, либо проверка по номеру кузова </p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Проверка на юридическую частоту</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon" style="margin-top: 20px;">
+                  <p>Заключение подборщика<br>стоимость 10 000 ₽ - 15 000 ₽<br>
+                    <span style="color: #757575; font-size:12px;">в зависимости от удаленности</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <hr style="z-index: -1" class="col-12">
+
+            <div class="check-auto-selection row">
+              <div class="col-12 gray-text text-start mb-3">
+                Полное сопровождение сделки и связь с клиентом 24/7.
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="d-flex align-items-start">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_616_855)">
+                      <path d="M22.5 9.375H21.6562L19.1925 5.07C19.0286 4.78302 18.7917 4.54447 18.5059 4.37852C18.2201 4.21257 17.8955 4.12511 17.565 4.125H6.435C6.1045 4.12511 5.77991 4.21257 5.4941 4.37852C5.20829 4.54447 4.97143 4.78302 4.8075 5.07L2.34375 9.375H1.5C1.20163 9.375 0.915483 9.49353 0.704505 9.7045C0.493526 9.91548 0.375 10.2016 0.375 10.5C0.375 10.7984 0.493526 11.0845 0.704505 11.2955C0.915483 11.5065 1.20163 11.625 1.5 11.625H1.875V18.75C1.875 19.2473 2.07254 19.7242 2.42417 20.0758C2.77581 20.4275 3.25272 20.625 3.75 20.625H6.375C6.87228 20.625 7.34919 20.4275 7.70083 20.0758C8.05246 19.7242 8.25 19.2473 8.25 18.75V16.875H15.75V18.75C15.75 19.2473 15.9475 19.7242 16.2992 20.0758C16.6508 20.4275 17.1277 20.625 17.625 20.625H20.25C20.7473 20.625 21.2242 20.4275 21.5758 20.0758C21.9275 19.7242 22.125 19.2473 22.125 18.75V11.625H22.5C22.7984 11.625 23.0845 11.5065 23.2955 11.2955C23.5065 11.0845 23.625 10.7984 23.625 10.5C23.625 10.2016 23.5065 9.91548 23.2955 9.7045C23.0845 9.49353 22.7984 9.375 22.5 9.375ZM6.65625 6.375H17.3438L19.0575 9.375H4.93875L6.65625 6.375ZM6 18.375H4.125V16.875H6V18.375ZM19.875 18.375H18V16.875H19.875V18.375ZM19.875 14.625H4.125V11.625H19.875V14.625Z" fill="#EB1C24"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4357 18.6274L23.4654 20.6575C23.5397 20.7318 23.5989 20.8208 23.6385 20.9161C23.6781 21.0119 23.6991 21.115 23.6991 21.2206C23.6991 21.6567 23.3398 22.016 22.9037 22.016C22.6925 22.016 22.4901 21.9319 22.341 21.7828L20.3108 19.7522C19.5648 20.2694 18.6765 20.5485 17.7653 20.5485C15.3151 20.5485 13.2991 18.532 13.2991 16.082C13.2991 13.6319 15.3151 11.616 17.7653 11.616C20.2155 11.616 22.232 13.6319 22.232 16.082C22.232 16.9932 21.9529 17.8814 21.4357 18.6274ZM14.8972 16.0859C14.8986 17.6609 16.1946 18.9563 17.7692 18.9578C19.3448 18.9578 20.6413 17.6614 20.6413 16.0859C20.6413 14.5104 19.3448 13.214 17.7692 13.214C16.1936 13.214 14.8972 14.5104 14.8972 16.0859Z" fill="#EB1C24"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M22.341 21.7827L20.3107 19.7521C19.5647 20.2693 18.6765 20.5484 17.7652 20.5484C15.3151 20.5484 13.299 18.532 13.299 16.0819C13.299 13.6319 15.3151 11.6159 17.7652 11.6159C20.2154 11.6159 22.232 13.6319 22.232 16.0819C22.232 16.9931 21.9528 17.8813 21.4356 18.6273L23.4653 20.6574C23.5397 20.7317 23.5988 20.8207 23.6384 20.916C23.678 21.0118 23.699 21.115 23.699 21.2206C23.699 21.6566 23.3397 22.0159 22.9036 22.0159C22.6925 22.0159 22.4901 21.9318 22.341 21.7827ZM24.3847 19.7383C24.5801 19.9337 24.7344 20.1657 24.8389 20.4173L24.8398 20.4195C24.9434 20.67 24.999 20.9417 24.999 21.2206C24.999 22.3746 24.0576 23.3159 22.9036 23.3159C22.3469 23.3159 21.8141 23.0943 21.4218 22.702L20.0823 21.3623C19.3565 21.6808 18.5679 21.8484 17.7652 21.8484C14.597 21.8484 11.999 19.2498 11.999 16.0819C11.999 12.9139 14.5972 10.3159 17.7652 10.3159C20.9331 10.3159 23.532 12.9137 23.532 16.0819C23.532 16.8846 23.3643 17.6732 23.0457 18.3991L24.3847 19.7383ZM14.8971 16.0858C14.8986 17.6609 16.1945 18.9563 17.7692 18.9578C19.3448 18.9578 20.6412 17.6614 20.6412 16.0858C20.6412 14.5103 19.3448 13.2139 17.7692 13.2139C16.1936 13.2139 14.8971 14.5103 14.8971 16.0858Z" fill="white"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_616_855">
+                        <rect width="24" height="24" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <p>Подбор авто с клиентом - 25 000 ₽</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="d-flex align-items-start">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.5 9.375H21.6562L19.1925 5.07C19.0286 4.78302 18.7917 4.54447 18.5059 4.37852C18.2201 4.21257 17.8955 4.12511 17.565 4.125H6.435C6.1045 4.12511 5.77991 4.21257 5.4941 4.37852C5.20829 4.54447 4.97143 4.78302 4.8075 5.07L2.34375 9.375H1.5C1.20163 9.375 0.915483 9.49353 0.704505 9.7045C0.493526 9.91548 0.375 10.2016 0.375 10.5C0.375 10.7984 0.493526 11.0845 0.704505 11.2955C0.915483 11.5065 1.20163 11.625 1.5 11.625H1.875V18.75C1.875 19.2473 2.07254 19.7242 2.42417 20.0758C2.77581 20.4275 3.25272 20.625 3.75 20.625H6.375C6.87228 20.625 7.34919 20.4275 7.70083 20.0758C8.05246 19.7242 8.25 19.2473 8.25 18.75V16.875H15.75V18.75C15.75 19.2473 15.9475 19.7242 16.2992 20.0758C16.6508 20.4275 17.1277 20.625 17.625 20.625H20.25C20.7473 20.625 21.2242 20.4275 21.5758 20.0758C21.9275 19.7242 22.125 19.2473 22.125 18.75V11.625H22.5C22.7984 11.625 23.0845 11.5065 23.2955 11.2955C23.5065 11.0845 23.625 10.7984 23.625 10.5C23.625 10.2016 23.5065 9.91548 23.2955 9.7045C23.0845 9.49353 22.7984 9.375 22.5 9.375ZM6.65625 6.375H17.3438L19.0575 9.375H4.93875L6.65625 6.375ZM6 18.375H4.125V16.875H6V18.375ZM19.875 18.375H18V16.875H19.875V18.375ZM19.875 14.625H4.125V11.625H19.875V14.625ZM8.625 1.875C8.625 1.57663 8.74353 1.29048 8.9545 1.0795C9.16548 0.868526 9.45163 0.75 9.75 0.75H14.25C14.5484 0.75 14.8345 0.868526 15.0455 1.0795C15.2565 1.29048 15.375 1.57663 15.375 1.875C15.375 2.17337 15.2565 2.45952 15.0455 2.6705C14.8345 2.88147 14.5484 3 14.25 3H9.75C9.45163 3 9.16548 2.88147 8.9545 2.6705C8.74353 2.45952 8.625 2.17337 8.625 1.875Z" fill="#EB1C24"/>
+                  </svg>
+                  <p>Регистрация автомобиля в ГАИ - 15 000 ₽</p>
+                </div>
+              </div>
+              <div class="col d-flex justify-content-xl-start justify-content-center">
+                <button class="btn goal-btn" data-bs-toggle="modal" data-bs-target="#mainFeedBackModal">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xxl-5 col-xl-6 col-12 d-flex justify-content-xl-end justify-content-center order-xl-2 order-2 mb-xl-0 mb-4">
+            <img style="z-index: 1; max-width: 100%" src="{% static 'img/auto-selection/1.png' %}" alt="car">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<div data-aos="fade-up">
+  <section class="welcome">
+    <div class="">
+      <div class="auto-selection" id="auto-selection">
+        <div class="row">
+
+          <div class="col-12">
+<!--            <div class="d-xl-inline-block d-none">-->
+<!--              <div class="col-12">-->
+<!--                <h2>Русификация автомобилей</h2>-->
+<!--              </div>-->
+<!--              <div class="col-12 gray-text text-start mb-4">-->
+<!--              </div>-->
+<!--            </div>-->
+
+            <div class="check-auto-selection row">
+              <div class="col-xl-4 col-md-6 col-12">
+              <h2 class="rus">Русификация автомобилей</h2>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Корейские бензиновые авто</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Корейские дизельные авто + отключение мочевины</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Европейские бензиновые авто</p>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 col-12">
+
+              <h2 class="rus d-none d-md-block" style="color: white !important;">_</h2>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Европейские дизельные авто + отключение мочевины</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Американские авто</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Японские авто (не все модели и марки)</p>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 col-12">
+              <h2 class="rus">Комплекс Т/О</h2>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Замена колес</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Покупка колес</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Т/О (замена масел и фильтров)</p>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="{% static 'img/auto-selection/check-mark.png' %}" alt="icon">
+                  <p>Дополнительные услуги</p>
+                </div>
+              </div>
+            </div>
+
+            <style>
+              .rus {
+                font-size: 18px !important;
+                margin-bottom:24px !important;
+                margin-top:24px !important;
+              }
+
+            </style>
+
+            <div class="check-auto-selection row">
+              <div class="col d-flex justify-content-xl-start justify-content-center">
+                <button class="btn goal-btn" data-bs-toggle="modal" data-bs-target="#mainFeedBackModal">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+<div data-aos="fade-up">
+  <section class="reviews-header">
+    <div class="row">
+      <div class="col-12">
+        <h2>Отзывы клиентов</h2>
+      </div>
+      <div class="col-9 gray-text text-start">
+        Реальные отзывы наших клинетов.
+      </div>
+      <div class="col-3 text-end custom-arrows">
+        <a class="custom-prev-arrow">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.46932 17.0306L0.969325 9.53061C0.899593 9.46096 0.844273 9.37824 0.80653 9.28719C0.768787 9.19615 0.749361 9.09855 0.749361 8.99999C0.749361 8.90143 0.768787 8.80383 0.80653 8.71278C0.844273 8.62174 0.899593 8.53902 0.969325 8.46936L8.46932 0.969365C8.61005 0.828634 8.80093 0.749573 8.99995 0.749573C9.19897 0.749573 9.38984 0.828634 9.53057 0.969365C9.67131 1.1101 9.75037 1.30097 9.75037 1.49999C9.75037 1.69901 9.67131 1.88988 9.53057 2.03061L2.56026 8.99999L9.53057 15.9694C9.60026 16.039 9.65553 16.1218 9.69324 16.2128C9.73096 16.3039 9.75037 16.4014 9.75037 16.5C9.75037 16.5985 9.73096 16.6961 9.69324 16.7872C9.65553 16.8782 9.60026 16.9609 9.53057 17.0306C9.46089 17.1003 9.37817 17.1556 9.28712 17.1933C9.19608 17.231 9.09849 17.2504 8.99995 17.2504C8.9014 17.2504 8.80382 17.231 8.71278 17.1933C8.62173 17.1556 8.53901 17.1003 8.46932 17.0306Z" fill="#888888"/>
+          </svg>
+        </a>
+        <a class="custom-next-arrow">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.46932 17.0306L0.969325 9.53061C0.899593 9.46096 0.844273 9.37824 0.80653 9.28719C0.768787 9.19615 0.749361 9.09855 0.749361 8.99999C0.749361 8.90143 0.768787 8.80383 0.80653 8.71278C0.844273 8.62174 0.899593 8.53902 0.969325 8.46936L8.46932 0.969365C8.61005 0.828634 8.80093 0.749573 8.99995 0.749573C9.19897 0.749573 9.38984 0.828634 9.53057 0.969365C9.67131 1.1101 9.75037 1.30097 9.75037 1.49999C9.75037 1.69901 9.67131 1.88988 9.53057 2.03061L2.56026 8.99999L9.53057 15.9694C9.60026 16.039 9.65553 16.1218 9.69324 16.2128C9.73096 16.3039 9.75037 16.4014 9.75037 16.5C9.75037 16.5985 9.73096 16.6961 9.69324 16.7872C9.65553 16.8782 9.60026 16.9609 9.53057 17.0306C9.46089 17.1003 9.37817 17.1556 9.28712 17.1933C9.19608 17.231 9.09849 17.2504 8.99995 17.2504C8.9014 17.2504 8.80382 17.231 8.71278 17.1933C8.62173 17.1556 8.53901 17.1003 8.46932 17.0306Z" fill="#888888"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="marg-row reviews-slider">
+      {% for review in reviews %}
+      <div class="review-wp">
+        <div class="review">
+          <div class="d-flex flex-row">
+            <div class="review-img">
+              <img src="/media/{{review.icon_user}}" class="review-img" alt="review">
+            </div>
+            <div class="client-info">
+              <p style="margin-bottom: 4px;">{{review.name}}</p>
+              <p class="clent-mark">
+                {% for i in '01234'|make_list %}
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.09981 1.38975C8.50165 0.699896 9.49831 0.699896 9.90006 1.38975L12.2292 5.3887L16.7522 6.36813C17.5325 6.53709 17.8405 7.48492 17.3086 8.08026L14.2251 11.5312L14.6912 16.1354C14.7716 16.9297 13.9654 17.5155 13.2348 17.1936L8.99998 15.3274L4.76511 17.1936C4.03455 17.5155 3.22827 16.9297 3.3087 16.1354L3.77487 11.5312L0.691412 8.08026C0.159478 7.48492 0.467453 6.53709 1.24771 6.36813L5.77068 5.3887L8.09981 1.38975Z" fill="#FFCC02"/>
+                </svg>
+                {% endfor %}
+              </p>
+            </div>
+          </div>
+          <div class="client-text" id="review-{{review.num_view}}">
+            <div class="row row-cols-2" style="margin-bottom: 10px; margin-top: 10px;">
+              {% if review.image1 != "нет фото" %}
+              <div class="col review-photo">
+                <img src="{{review.image1}}">
+              </div>
+              {% endif %}
+
+              {% if review.image2 != "нет фото" %}
+              <div class="col review-photo">
+                <img src="{{review.image2}}">
+              </div>
+              {% endif %}
+            </div>
+            <p>{{review.text_review}}</p>
+            <span class="client-date">{{review.reviews_date}}</span>
+          </div>
+          <p id="more-{{review.num_view}}" onclick="showFullReview({{review.num_view}})" class="m-0 show-more">развернуть</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<div data-aos="fade-up">
+  {% include 'feedback.html' %}
+</div>
+
+<div class="modal fade" id="main-dialog" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div id="modal-ban" class="modal-content feedback" style="border-radius: 16px; background-color: #fff !important; padding-left: 24px; padding-right:32px; padding-bottom:24px;">
+      <style>
+        #modal-ban {
+            background-image: url("{% static 'img/callback.png' %}") !important;
+        }
+      </style>
+
+
+      <div class="modal-header d-flex justify-content-between" style="padding: 0px; border-bottom: 0px;">
+        <h2 class="text-start" style="font-size: 24px !important; margin-top: 24px; margin-bottom: 0px !important;">Нужна консультация?</h2>
+        <button type="button" class="btn-close btn-close-gray col-2" style="margin-top: 24px; opacity: 1; background: transparent var(--bs-btn-close-bg) center/1em auto no-repeat !important; width: 20px !important;" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+
+      <div class="form-wp p-0">
+
+        <p style="color: #757575; font-size: 14px !important; margin-bottom: 1.5rem">Оставьте Ваши контактные данные и мы Вам перезвоним!</p>
+        <div class="modal-body border-0 p-0 row justify-content-between" style="background: transparent !important;">
+          <form id="feedback-form-modal" class="feedback-form-form" method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-8">
+
+                <div class="row">
+                  <div class="col-6">
+                    <label>Имя</label>
+                    {{feedbackForm.name}}
+                  </div>
+                  <div class="col-6">
+                    <label>Телефон <span style="color: #757575">(обязательно)</span></label>
+                    {{feedbackForm.number}}
+                  </div>
+
+                  <div class="col-12">
+                    <button type="submit" onclick="ym(97653553,'reachGoal','YM-form'); return true;" style="height: 60px !important">Отправить</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 d-none d-xl-flex align-items-center justify-content-center">
+                <img src="{% static 'img/logo-ban.png' %}" style="width: 80%;" alt="logo"/>
+              </div>
+
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	//Отзывы - свернуть/развернуть
+	function showFullReview(idRev) {
+		var rev = document.getElementById('review-' + idRev);
+		var more = document.getElementById('more-' + idRev);
+
+		if ((document.getElementById('more-' + idRev).innerHTML) == 'развернуть') {
+			rev.style.maxHeight = "1000px";
+			more.innerHTML = "свернуть"
+		}
+		else {
+			rev.style.maxHeight = "300px";
+			more.innerHTML = "развернуть"
+		}
+	}
+</script>
+
+{% endblock %}

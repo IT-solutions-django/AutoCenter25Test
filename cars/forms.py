@@ -3,12 +3,10 @@ from django.forms import ModelForm, TextInput, Textarea
 from django import forms
 from .models import (
     FeedBack,
-    Transmission,
-    Drive,
     Color,
-    CarKorea,
+    CarMark,
+    Privod
 )
-from .sub_fun import get_all_model, get_unique_param
 
 
 class FeedbackForm(ModelForm):
@@ -30,9 +28,9 @@ class FeedbackForm(ModelForm):
                     "class": "form-control fb_phone",
                     "required": "true",
                     "type": "tel",
-                    "placeholder": "+7 ",
+                    "placeholder": "+7",
                     "pattern": r"^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$",
-                    "title": "+7 (XXX) XXX-XX-XX",
+                    "title": "+7 (9XX) XXX-XX-XX",
                 }
             ),
             "message": Textarea(
@@ -53,7 +51,6 @@ class FeedbackForm(ModelForm):
 
 class CarFilterForm(forms.Form):
     brand = forms.ChoiceField(
-        choices=[],
         required=False,
         label="Марка",
         widget=forms.Select(
@@ -61,7 +58,6 @@ class CarFilterForm(forms.Form):
         ),
     )
     model = forms.ChoiceField(
-        choices=[],
         required=False,
         label="Модель",
         widget=forms.Select(
@@ -69,94 +65,49 @@ class CarFilterForm(forms.Form):
         ),
     )
 
-    mileage_min = forms.Field(
+    mileage_min = forms.ChoiceField(
         required=False,
         label="Пробег от",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control discharges",
-                "placeholder": "Пробег от, км",
-                "type": "number",
-                "min": "0",
-                "step": "10000",
-                "onkeypress": "limitCharacters(this, 6, event)"
-            },
-        ),
-    )
-    mileage_max = forms.Field(
-        required=False,
-        label="до",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control discharges", 
-                "placeholder": "до", 
-                "type": "number",
-                "min": "0",
-                "step": "10000",
-                "onkeypress": "limitCharacters(this, 6, event)"
-            },
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
         ),
     )
 
-    year_min = forms.Field(
+    mileage_max = forms.ChoiceField(
+        required=False,
+        label="Пробег до",
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
+        ),
+    )
+
+    year_min = forms.ChoiceField(
         required=False,
         label="Год от",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control", 
-                "placeholder": "Год от", 
-                "type": "number",
-                "min": "2015",
-                "max": "2024",
-                "step": "1",
-                "onkeypress": "limitCharacters(this, 4, event)"
-            },
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
         ),
     )
-    year_max = forms.Field(
+    year_max = forms.ChoiceField(
         required=False,
         label="до",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control", 
-                "placeholder": "до", 
-                "type": "number",
-                "min": "2015",
-                "max": "2024",
-                "step": "1",
-                "onkeypress": "limitCharacters(this, 4, event)"
-            },
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
         ),
     )
 
-    engine_volume_min = forms.Field(
+    engine_volume_min = forms.ChoiceField(
         required=False,
         label="Объем от",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control discharges",
-                "placeholder": "Объем от, cc",
-                "type": "number",
-                "min": "0",
-                "max": "10000",
-                "step": "100",
-                "onkeypress": "limitCharacters(this, 4, event)"
-            },
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
         ),
     )
-    engine_volume_max = forms.Field(
+    engine_volume_max = forms.ChoiceField(
         required=False,
         label="до",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control discharges",
-                "placeholder": "до",
-                "type": "number",
-                "min": "0",
-                "max": "10000",
-                "step": "100",
-                "onkeypress": "limitCharacters(this, 4, event)"
-            },
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
         ),
     )
 
@@ -190,6 +141,14 @@ class CarFilterForm(forms.Form):
             attrs={
                 "class": "form-control hidden-select"
             },
+        ),
+    )
+
+    rate = forms.ChoiceField(
+        required=False,
+        label="Рейтинг",
+        widget=forms.Select(
+            attrs={"class": "form-control hidden-select"},
         ),
     )
 
@@ -240,129 +199,106 @@ class CarFilterForm(forms.Form):
 class CarChinaFilterForm(CarFilterForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["brand"].choices = [("", "Любое")] + get_unique_param("MARKA_NAME", "china")
-        
+
+        brands = CarMark.objects.filter(country='Китай').values_list('id', 'name').order_by('name')
+
+        self.fields["brand"].choices = [("", "Любое")] + list(brands)
+
         self.fields["model"].choices = [("", "Любое")]
 
-        self.fields["transmission"].choices = [("", "Любое")] + get_unique_param("KPP", "china")
-        
-        self.fields["drive"].choices = [("", "Любое")] + get_unique_param("PRIV", "china")
-        
-        self.fields["color"].choices = [("", "Любое")] + get_unique_param("COLOR", "china")
-        
-       
+        self.fields["transmission"].choices = [("", "Любое"), (2, 'Автомат'), (1, 'Механика')]
+
+        privods = Privod.objects.all().values_list('id', 'name')
+
+        self.fields["drive"].choices = [("", "Любое")] + list(privods)
+
+        colors = Color.objects.filter(country='Китай').values_list('id', 'name')
+
+        self.fields["color"].choices = [("", "Любое")] + list(colors)
+
+        self.fields['mileage_min'].choices = [("", "Любое")] + [(i, f"{i} км") for i in range(0, 200001, 10000)]
+
+        self.fields['mileage_max'].choices = [("", "Любое")] + [(i, f"{i} км") for i in range(0, 200001, 10000)]
+
+        self.fields['engine_volume_min'].choices = [("", "Любое")] + [(i, f'{i / 1000:.1f}') for i in
+                                                                      range(700, 6001, 100)]
+
+        self.fields['engine_volume_max'].choices = [("", "Любое")] + [(i, f'{i / 1000:.1f}') for i in
+                                                                      range(700, 6001, 100)]
+
+        self.fields['year_min'].choices = [("", "Любое")] + [(i, i) for i in range(2008, 2025)]
+
+        self.fields['year_max'].choices = [("", "Любое")] + [(i, i) for i in range(2008, 2025)]
+
+
 class CarJapanFilterForm(CarFilterForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["brand"].choices = [("", "Любое")] + get_unique_param("MARKA_NAME", "stats")
-        
+
+        brands = CarMark.objects.filter(country='Япония').values_list('id', 'name').order_by('name')
+
+        self.fields["brand"].choices = [("", "Любое")] + list(brands)
+
         self.fields["model"].choices = [("", "Любое")]
 
-        self.fields["transmission"].choices = [("", "Любое")] + get_unique_param("KPP", "stats")
-        
-        self.fields["drive"].choices = [("", "Любое")] + get_unique_param("PRIV", "stats")
-        
-        self.fields["color"].choices = [("", "Любое")] + get_unique_param("COLOR", "stats")
+        self.fields["transmission"].choices = [("", "Любое"), (2, 'Автомат'), (1, 'Механика')]
+
+        privods = Privod.objects.all().values_list('id', 'name')
+
+        self.fields["drive"].choices = [("", "Любое")] + list(privods)
+
+        colors = Color.objects.filter(country='Япония').values_list('id', 'name')
+
+        self.fields["color"].choices = [("", "Любое")] + list(colors)
+
+        self.fields['mileage_min'].choices = [("", "Любое")] + [(i, f"{i} км") for i in range(0, 200001, 10000)]
+
+        self.fields['mileage_max'].choices = [("", "Любое")] + [(i, f"{i} км") for i in range(0, 200001, 10000)]
+
+        self.fields['engine_volume_min'].choices = [("", "Любое")] + [(i, f'{i / 1000:.1f}') for i in
+                                                                      range(700, 6001, 100)]
+
+        self.fields['engine_volume_max'].choices = [("", "Любое")] + [(i, f'{i / 1000:.1f}') for i in
+                                                                      range(700, 6001, 100)]
+
+        self.fields['year_min'].choices = [("", "Любое")] + [(i, i) for i in range(2008, 2025)]
+
+        self.fields['year_max'].choices = [("", "Любое")] + [(i, i) for i in range(2008, 2025)]
+
+        self.fields['rate'].choices = [("", "Любое"), ("R", "R"), ("RA", "RA"), ("3", "3"), ("3.5", "3.5"), ("4", "4"),
+                                       ("4.", "4."), ("4.5", "4.5"), ("5", "5"), ("6", "6"), ("S", "S")]
 
 
-class CarKoreaFilterForm(forms.Form):
-    brand = forms.ChoiceField(
-        required=False,
-        label="Марка",
-        widget=forms.Select(
-            attrs={"class": "form-control hidden-select"},
-        ),
-    )
-    model = forms.ChoiceField(
-        required=False,
-        label="Модель",
-        widget=forms.Select(
-            attrs={"class": "form-control hidden-select"},
-        ),
-    )
-
-    mileage_min = forms.Field(
-        required=False,
-        label="Пробег от",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control discharges",
-                "placeholder": "Пробег от",
-            },
-        ),
-    )
-    mileage_max = forms.Field(
-        required=False,
-        label="до",
-        widget=forms.TextInput(
-            attrs={"class": "form-control discharges", "placeholder": "до"},
-        ),
-    )
-
-    year_min = forms.Field(
-        required=False,
-        label="Год от",
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Год от"},
-        ),
-    )
-    year_max = forms.Field(
-        required=False,
-        label="до",
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "до"},
-        ),
-    )
-
-    engine_volume_min = forms.Field(
-        required=False,
-        label="Объем от",
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control discharges",
-                "placeholder": "Объем двигателя",
-            },
-        ),
-    )
-    engine_volume_max = forms.Field(
-        required=False,
-        label="до",
-        widget=forms.TextInput(
-            attrs={"class": "form-control discharges", "placeholder": "до"},
-        ),
-    )
-
-    drive = forms.ModelChoiceField(
-        queryset=Drive.objects.none(),
-        required=False,
-        label="Тип привода",
-        widget=forms.Select(
-            attrs={"class": "form-control hidden-select"},
-        ),
-    )
-    color = forms.ModelChoiceField(
-        queryset=Color.objects.none(),
-        required=False,
-        label="Цвет",
-        widget=forms.Select(
-            attrs={"class": "form-control hidden-select"},
-        ),
-    )
-
+class CarKoreaFilterForm(CarFilterForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["brand"].choices = [("", "Любое")] + list(
-            CarKorea.objects.values_list("brand", "brand").distinct()
-        )
-        
-        self.fields["model"].choices = [("", "Любое")] + list(
-            CarKorea.objects.values_list("model", "model").distinct()
-        )
-        
-        self.fields["drive"].queryset = Drive.objects.filter(
-            carkorea__isnull=False
-        ).distinct()
-        
-        self.fields["color"].queryset = Color.objects.filter(
-            carkorea__isnull=False
-        ).distinct()
+
+        brands = CarMark.objects.filter(country='Корея').values_list('id', 'name').order_by('name')
+
+        self.fields["brand"].choices = [("", "Любое")] + list(brands)
+
+        self.fields["model"].choices = [("", "Любое")]
+
+        self.fields["transmission"].choices = [("", "Любое"), (2, 'Автомат'), (1, 'Механика')]
+
+        privods = Privod.objects.all().values_list('id', 'name')
+
+        self.fields["drive"].choices = [("", "Любое")] + list(privods)
+
+        colors = Color.objects.filter(country='Корея').values_list('id', 'name')
+
+        self.fields["color"].choices = [("", "Любое")] + list(colors)
+
+        self.fields['mileage_min'].choices = [("", "Любое")] + [(i, f"{i} км") for i in range(0, 200001, 10000)]
+
+        self.fields['mileage_max'].choices = [("", "Любое")] + [(i, f"{i} км") for i in range(0, 200001, 10000)]
+
+        self.fields['engine_volume_min'].choices = [("", "Любое")] + [(i, f'{i / 1000:.1f}') for i in
+                                                                      range(700, 6001, 100)]
+
+        self.fields['engine_volume_max'].choices = [("", "Любое")] + [(i, f'{i / 1000:.1f}') for i in
+                                                                      range(700, 6001, 100)]
+
+        self.fields['year_min'].choices = [("", "Любое")] + [(i, i) for i in range(2008, 2025)]
+
+        self.fields['year_max'].choices = [("", "Любое")] + [(i, i) for i in range(2008, 2025)]

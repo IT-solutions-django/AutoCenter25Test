@@ -1,8 +1,6 @@
-from datetime import datetime
 from requests import get
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .models import UniqueColor
 
 
 def get_car_all_info(car_id, name_table, ip_user):
@@ -21,7 +19,7 @@ def get_car_all_info(car_id, name_table, ip_user):
         return None
 
 
-def calc_price(price, currency, year, volume, table): 
+def calc_price(price, currency, year, volume, table):
     try:
         if table == "china":
             freight = 15000
@@ -31,18 +29,18 @@ def calc_price(price, currency, year, volume, table):
             compane_comision = 150_000
             per_price = (35 * price) // 100
             price = price + per_price
-            
+
         if table == "stats":
             freight_vl = 100_000
             if volume < 1900:
                 freight = 100_000
             else:
                 freight = 400_000
-            
+
             delivery = 70_000
-            brokerServices = 78_000 
+            brokerServices = 78_000
             compane_comision = 50_000
-        
+
         one_rub = currency.jpy / 100
         price_rus = round(price / one_rub)
         if table == "china":
@@ -72,9 +70,9 @@ def calc_price(price, currency, year, volume, table):
             tof = 27000
         else:
             tof = 30000
-      
+
         age = datetime.now().year - year
-            
+
         if age < 3:
             if volume >= 3500:
                 yts = 1235200
@@ -153,8 +151,8 @@ def calc_price(price, currency, year, volume, table):
 
         res_rus = toll + yts + compane_comision + brokerServices
         res_jpn = (freight + delivery + freight_vl + price) * one_rub
-        
-        #if table == "china":
+
+        # if table == "china":
         #    res_rus = (
         #        toll
         #        + yts
@@ -163,7 +161,6 @@ def calc_price(price, currency, year, volume, table):
         #        + compane_comision_china
         #    )  # china
         #    res_jpn = (20_000 + price) * one_rub  # china
-        
 
         return round((res_jpn + res_rus) / 1000) * 1000, int(res_rus), int(res_jpn), toll
     except Exception as e:
@@ -202,8 +199,3 @@ def get_all_model(table):
         list_model += unique_param_with_brand("MODEL_NAME", table, i)
 
     return [(i, i) for i in set(list_model)]
-  
-  
-def get_unique_param(param, table):
-    return [(i.name, i.name) for i in UniqueColor.objects.filter(type_of_unique=param, table=table)]
-            

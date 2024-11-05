@@ -55,12 +55,12 @@
 		{% for car in cars %}
 		<div class="col">
               <div class="auto-card">
-				<a href="/cars/{{car.id}}">
-                  <img src="/media/{{car.photos.all.0}}" alt="{{car.brand}} {{car.model}}">
+				<a href="/car_japan/{{car.api_id}}">
+                  <img src="{{car.photos.0}}" alt="{{car.brand}} {{car.model}}">
 				  </a>
                   <div class="car-info">
                       <h3 class="my-0">{{car.brand}} {{car.model}}</h3>
-                      <p>{{car.year}} • {{car.engine_volume}} cc • {{car.drive}} • {{car.transmission}}</p>
+                      <p>{{car.year}} • {{car.engine_volume}} л • {{car.drive}} • {{car.transmission}}</p>
                       <div class="d-flex flex-sm-row flex-column justify-content-between align-items-sm-center align-items-start">
                           <span class="mb-sm-0 mb-2">{{car.price|intspace}} ₽</span>
                           <button class="btn submit-app"  data-bs-toggle="modal" data-bs-target="#mainFeedBackModal" onclick="setModalInput('Я заинтересовался автомобилем {{car.brand}} {{car.model}} {{car.year}}')">Оставить заявку</button>
@@ -322,7 +322,7 @@
                   <h3>О нас</h3>
                   <p>
                       Компания «AUTOCENTER» предлагает широкий выбор автомобилей от ведущих мировых
-                      производителей.Мы специализируемся на продаже новых и подержанных авто. Наша
+                      производителей. Мы специализируемся на продаже новых и подержанных авто. Наша
                       команда профессионалов поможет вам выбрать идеальный автомобиль, учитывая ваши
                       потребности и бюджет.
                   </p>
@@ -398,7 +398,11 @@
 				  <div class="review">
 					  <div class="d-flex flex-row">
 						  <div class="review-img">
-							  <img src="/media/{{review.icon_user}}" class="review-img" alt="review">
+                              {% if review.icon_user %}
+							  <img src="{{review.icon_user}}" class="review-img" alt="review">
+                              {% else %}
+                              <img src="/media/user/phoro_user/0c3c22da-32c9-11ef-a698-31ca6a59cdec.webp" class="review-img" alt="review">
+                              {% endif %}
 						  </div>
 						  <div class="client-info">
 							  <p style="margin-bottom: 4px;">{{review.name}}</p>
@@ -413,22 +417,25 @@
 					  </div>
 					  <div class="client-text" id="review-{{review.num_view}}">
 						  <div class="row row-cols-2" style="margin-bottom: 10px; margin-top: 10px;">
-                            {% if review.image1 != "нет фото" %}
+                            {% if review.image1 %}
 							<div class="col review-photo">
 								<img src="{{review.image1}}">
 							</div>
                             {% endif %}
 
-                            {% if review.image2 != "нет фото" %}
+                            {% if review.image2 %}
 							<div class="col review-photo">
 								<img src="{{review.image2}}">
 							</div>
                             {% endif %}
 						  </div>
 						  <p>{{review.text_review}}</p>
-						  <span class="client-date">{{review.reviews_date}}</span>
 					  </div>
+                      {% with review.text_review|wordcount as word_count %}
+                      {% if word_count > 50 %}
 					  <p id="more-{{review.num_view}}" onclick="showFullReview({{review.num_view}})" class="m-0 show-more">развернуть</p>
+                      {% endif %}
+                      {% endwith %}
 				  </div>
 			  </div>			
 			{% endfor %}
@@ -652,9 +659,8 @@
 <script>
 	setTimeout(function() {
 		$('#main-dialog').modal('show');
-    }, 10000); //30000
+    }, 30000); //30000
 </script>
-
 
 <script>
 	//Отзывы - свернуть/развернуть

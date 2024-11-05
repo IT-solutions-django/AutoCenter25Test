@@ -617,96 +617,70 @@
       <div class="car-wp row">
         <h2>Характеристики автомобиля</h2>
         <div class="row-col-2 order-md-1 order-2 car-chara">
+            {% if car.year %}
           <div class="d-flex">
             <div class="car-info">
               <p class>Год выпуска:</p>
             </div>
-            {% if car.year %}
             <p class="car-value">{{ car.year }} г.</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
           </div>
-          <div class="d-flex">
-            <div class="car-info">
-              <p>Кузов:</p>
-            </div>
-            {% if car.body_type %}
-            <p class="car-value">{{ car.body_type }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
             {% endif %}
-          </div>
+            {% if country %}
           <div class="d-flex">
             <div class="car-info">
               <p>Страна:</p>
             </div>
-            {% if country %}
             <p class="car-value">{{ country }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
           </div>
+            {% endif %}
+            {% if car.transmission %}
           <div class="d-flex">
             <div class="car-info">
               <p>КПП:</p>
             </div>
-            {% if car.transmission %}
             <p class="car-value">{{ car.transmission }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
           </div>
-          <div class="d-flex">
+            {% endif %}
+            {% if country == 'Япония' and car.rate %}
+            <div class="d-flex">
             <div class="car-info">
-              <p>Двигатель:</p>
+              <p>Рейтинг:</p>
             </div>
-            {% if car.fuel_type %}
-            <p class="car-value">{{ car.fuel_type }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
+            <p class="car-value">{{ car.rate }}</p>
           </div>
+            {% endif %}
+            {% if car.engine_volume %}
           <div class="d-flex">
             <div class="car-info">
               <p>Объем двигателя:</p>
             </div>
-            {% if car.engine_volume %}
-            <p class="car-value">{{ car.engine_volume }} cc</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
+            <p class="car-value">{{ car.engine_volume }} л</p>
           </div>
+            {% endif %}
+            {% if car.drive %}
           <div class="d-flex">
             <div class="car-info">
               <p>Привод:</p>
             </div>
-            {% if car.drive %}
             <p class="car-value">{{ car.drive }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
           </div>
+            {% endif %}
+            {% if car.color %}
           <div class="d-flex">
             <div class="car-info">
               <p>Цвет:</p>
             </div>
-            {% if car.color %}
             <p class="car-value">{{ car.color }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
           </div>
+            {% endif %}
+            {% if car.mileage %}
           <div class="d-flex">
             <div class="car-info">
               <p>Пробег:</p>
             </div>
-            {% if car.mileage %}
             <p class="car-value">{{ car.mileage | intspace }}</p>
-            {% else %}
-            <p class="car-value">Нет данных</p>
-            {% endif %}
           </div>
+            {% endif %}
         </div>
 		
 		
@@ -718,24 +692,24 @@
 			{% endif %} 
 		</p>
 		
-        {% if car.inside %}
+        {% if car.toll %}
         <p class="car-value col-12 order-md-3 order-1" style="color: #757575">
-          Расходы по РФ: {{ car.inside | intspace }} ₽
+          Расходы по РФ: {{ car.toll | intspace }} ₽
         </p>
-        {% endif %} 
-		
-		{% if car.outside %} 
+        {% endif %}
+
+		{% if car.outside %}
 			{% if country == "Япония" %}
 			<p class="car-value col-12 order-md-3 order-1" style="color: #757575">
 			  Расходы по Японии: {{ car.outside | intspace }} ₽
 			</p>
-			{% endif %} 
-		
+			{% endif %}
+
 			{% if country == "Китай" %}
 			<p class="car-value col-12 order-md-3 order-1" style="color: #757575">
 			  Расходы по Китаю: {{ car.outside | intspace }} ₽
 			</p>
-			{% endif %} 
+			{% endif %}
 			
 			{% if country == "Япония" %} 
 				{% if car.engine_volume|add:"0" > 1900 %}

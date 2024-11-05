@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Белый",
+    "colors": [
+      "white",
+      "white 2",
+      "pearl white",
+      "pearl white 2",
+      "cream",
+      "ivory",
+      "white pearl",
+      "white two-tone",
+      "white-black",
+      "white-yellow",
+      "white-blue",
+      "white violet",
+      "leaf white",
+      "taffeta white",
+      "premium white"
+    ]
+  },
+  {
+    "name": "Черный",
+    "colors": [
+      "black",
+      "black 2",
+      "black pearl",
+      "black pearl 2",
+      "black m",
+      "black m2",
+      "black two-tone",
+      "black chameleon",
+      "carbon black",
+      "phantom black",
+      "black-blue",
+      "black-white",
+      "dark",
+      "dark brown",
+      "dark cherry"
+    ]
+  },
+  {
+    "name": "Коричневый",
+    "colors": [
+      "brown",
+      "brown 2",
+      "brown m",
+      "mocha brown",
+      "chocolate",
+      "b black",
+      "maroon brown",
+      "dark brown",
+      "brown pearl"
+    ]
+  },
+  {
+    "name": "Фиолетовый",
+    "colors": [
+      "purple",
+      "purple 2",
+      "violet",
+      "lilac silver",
+      "lavender",
+      "dark violet",
+      "mauve"
+    ]
+  },
+  {
+    "name": "Зеленый",
+    "colors": [
+      "green",
+      "green 2",
+      "light green",
+      "dark green",
+      "olive",
+      "olive 2",
+      "green m",
+      "green m2",
+      "yellow-green",
+      "green two-tone",
+      "mint green",
+      "green/white"
+    ]
+  },
+  {
+    "name": "Серый",
+    "colors": [
+      "gray",
+      "gray 2",
+      "gray m",
+      "gray m2",
+      "dark gray",
+      "dark gray 2",
+      "platinum gray",
+      "charcoal",
+      "grey pearl"
+    ]
+  },
+  {
+    "name": "Серебряный",
+    "colors": [
+      "silver",
+      "silver 2",
+      "silver m",
+      "silver metallic",
+      "bright silver",
+      "sonic silver",
+      "cool silver",
+      "mint silver",
+      "ceramic metallic",
+      "aluminum"
+    ]
+  },
+  {
+    "name": "Синий/голубой",
+    "colors": [
+      "blue",
+      "blue 2",
+      "light blue",
+      "navy blue",
+      "navy blue 2",
+      "navy blue m",
+      "navy blue m2",
+      "turquoise",
+      "turquoise 2",
+      "sky blue",
+      "blue-grey",
+      "blue metal",
+      "blue-white",
+      "blue-silver",
+      "blue acme shubu"
+    ]
+  },
+  {
+    "name": "Бежевый",
+    "colors": [
+      "beige",
+      "beige 2",
+      "beige m",
+      "cream 2",
+      "champagne",
+      "champagne metallic",
+      "beige-grey",
+      "beige/white"
+    ]
+  },
+  {
+    "name": "Желтый",
+    "colors": [
+      "yellow",
+      "yellow 2",
+      "light yellow",
+      "sunshine yellow",
+      "premium yellow",
+      "warm white",
+      "yellow-green"
+    ]
+  },
+  {
+    "name": "Золотой",
+    "colors": [
+      "gold",
+      "gold 2",
+      "gold pearl",
+      "champagne",
+      "titanium",
+      "titanium khaki"
+    ]
+  },
+  {
+    "name": "Красный",
+    "colors": [
+      "red",
+      "red 2",
+      "dark red wine",
+      "wine",
+      "wine 2",
+      "red metall",
+      "red two-tone",
+      "garnet red",
+      "rose red",
+      "red-grey",
+      "red-black",
+      "red-white",
+      "red metallic"
+    ]
+  },
+  {
+    "name": "Бордовый",
+    "colors": [
+      "burgundy",
+      "bordeaux",
+      "dark red wine",
+      "wine m",
+      "maroon",
+      "dark bordeaux"
+    ]
+  },
+  {
+    "name": "Розовый",
+    "colors": [
+      "pink",
+      "pink 2",
+      "rose",
+      "rose 2",
+      "sakura pink",
+      "light rose",
+      "pink gold",
+      "mint two-tone"
+    ]
+  },
+  {
+    "name": "Оранжевый",
+    "colors": [
+      "orange",
+      "orange 2",
+      "peach",
+      "yellow-blue-orange",
+      "orange two-tone"
+    ]
+  }
+]

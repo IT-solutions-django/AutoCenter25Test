@@ -4,7 +4,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger
 from math import ceil
 import requests
 from .get_json_api import get_car
-import datetime
 
 
 class CustomPaginator(Paginator):
@@ -21,7 +20,7 @@ class CustomPaginator(Paginator):
     def _get_page(self, *args, **kwargs):
         page_number = args[1]
         offset = (page_number - 1) * self.per_page
-        
+
         url = self.api_url.format(
             table=self.table,
             filter=self.filter,
@@ -30,7 +29,7 @@ class CustomPaginator(Paginator):
             offset=offset,
             ip=self.ip,
         )
-        
+
         res_text = requests.get(url).text
         queryset = self.processing_data(res_text)
         return Page(queryset, page_number, self)

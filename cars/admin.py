@@ -14,26 +14,6 @@ def copy_objects(modeladmin, request, queryset):
 copy_objects.short_description = "Копировать выбранные объекты"
 
 
-@admin.register(Drive)
-class DriveAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(TypeEngine)
-class TypeEngineAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Transmission)
-class TransmissionAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(BodyType)
-class BodyTypeAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
     pass
@@ -42,25 +22,10 @@ class ReviewsAdmin(admin.ModelAdmin):
 @admin.register(PhotoCars)
 class PhotoCarsAdmin(admin.ModelAdmin):
     pass
-    
+
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(CarChina)
-class CarChinaAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(CarKorea)
-class CarKoreaAdmin(admin.ModelAdmin):
-    actions = [copy_objects]
-
-
-@admin.register(CarJapan)
-class CarJapanAdmin(admin.ModelAdmin):
     pass
 
 
@@ -72,12 +37,38 @@ class CarMainPageAdmin(admin.ModelAdmin):
 @admin.register(FeedBack)
 class FeedBackAdmin(admin.ModelAdmin):
     pass
-    
+
+
 @admin.register(Currency)
 class CurrencyAdmin(admin.ModelAdmin):
     pass
 
-    
-@admin.register(UniqueColor)
+
+@admin.register(ColorTag)
+class UniqueColorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CarMark)
+class UniqueColorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CarModel)
+class UniqueColorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Privod)
+class UniqueColorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(PrivodTag)
+class UniqueColorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(BaseFilter)
 class UniqueColorAdmin(admin.ModelAdmin):
     pass

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Белый",
+    "colors": [
+      "White"
+    ]
+  },
+  {
+    "name": "Чёрный",
+    "colors": [
+      "Black"
+    ]
+  },
+  {
+    "name": "Коричневый",
+    "colors": [
+      "Brown-Champagne"
+    ]
+  },
+  {
+    "name": "Красный",
+    "colors": [
+      "Red-Purple"
+    ]
+  },
+  {
+    "name": "Серый",
+    "colors": [
+      "Silver-Gray"
+    ]
+  },
+  {
+    "name": "Жёлтый",
+    "colors": [
+      "Yellow-Orange"
+    ]
+  },
+  {
+    "name": "Синий",
+    "colors": [
+      "Blue"
+    ]
+  },
+  {
+    "name": "Зелёный",
+    "colors": [
+      "Green"
+    ]
+  }
+]

@@ -1,16 +1,17 @@
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "webapp.settings")
 import django
+
 django.setup()
-from django.core.management import call_command
 from multiprocessing import *
 from bs4 import BeautifulSoup
 import schedule, time, requests
-from .models import Currency, UniqueColor
+from .models import Currency
 import re
 
- 
 pattern = re.compile("^[a-zA-Zа-яА-ЯёЁ0-9\,\-\ ]+$")
+
 
 async def start_process():
     p1 = Process(target=start_schedule, args=()).start()
@@ -18,7 +19,7 @@ async def start_process():
 
 def start_schedule():
     schedule.every().day.at("02:00").do(curr)
-    #schedule.every(1115).seconds.do(curr)
+    # schedule.every(1115).seconds.do(curr)
     schedule.every(120).minutes.do(get_unique)
 
     while True:
@@ -27,12 +28,12 @@ def start_schedule():
 
 
 def curr():
-    url = 'http://auc.autocenter25.com/currency' 
-    
+    url = 'http://auc.autocenter25.com/currency'
+
     try:
         response = requests.get(url).json()
-        #print("response =", response)
-        
+        # print("response =", response)
+
         currency = Currency(id=0)
         currency.date = response.get("date")
         currency.usd = response.get("usd")
@@ -47,8 +48,6 @@ def curr():
 
 
 def get_unique():
-    UniqueColor.objects.all().delete()
-
     for table in ["stats", "china"]:
         for param in ["MARKA_NAME", "KPP", "PRIV", "COLOR"]:
             req = requests.get(
@@ -58,19 +57,19 @@ def get_unique():
             soup = BeautifulSoup(req, "lxml-xml")
             root = soup.find("aj")
             rows = root.find_all("row")
-            
+
             if param == "MARKA_NAME":
                 list_param = [i.find(param).text for i in rows]
-                
-                list_param = [i for i in list_param if i not in 
-                    ["MITSUOKA", "BIRKIN", "HINO", "HITACHI", "ISEKI", "KOBELCO", "KOMATSU", "KUBOTA", "SUMITOMO", "TADANO", "WINNEBAGO", "YAMAHA", "YANMAR", "OTHERS", "TRIUMPH", "TCM", "LANCIA"]
-                ]
-                
+
+                list_param = [i for i in list_param if i not in
+                              ["MITSUOKA", "BIRKIN", "HINO", "HITACHI", "ISEKI", "KOBELCO", "KOMATSU", "KUBOTA",
+                               "SUMITOMO", "TADANO", "WINNEBAGO", "YAMAHA", "YANMAR", "OTHERS", "TRIUMPH", "TCM",
+                               "LANCIA"]
+                              ]
+
             else:
                 list_param = [i.find(param).text for i in rows if pattern.search(i.find(param).text) is not None]
-            
+
             list_param = sorted(list_param)
             for i, _key in enumerate(list_param):
-                col = UniqueColor.objects.create(name=_key, type_of_unique=param, table=table)
-                col.save()
-                    
+                pass
