@@ -10,12 +10,16 @@ from .get_json_api import get_count, get_car
 from .models import CarMark, Privod, Color, BaseFilter
 
 ORDERING = {
-    "new": "ORDER+BY+YEAR+DESC+",
-    "old": "ORDER+BY+YEAR+ASC+",
-    "low_eng_v": "ORDER+BY+ENG_V+ASC+",
-    "high_eng_v": "ORDER+BY+ENG_V+DESC+",
-    "new_auc_date": "ORDER+BY+AUCTION_DATE+DESC+",
-    "old_auc_date": "ORDER+BY+AUCTION_DATE+ASC+",
+    "asc_mileage": "ORDER+BY+MILEAGE+ASC+",
+    "desc_mileage": "ORDER+BY+MILEAGE+DESC+",
+    "asc_price": "ORDER+BY+FINISH+ASC+",
+    "desc_price": "ORDER+BY+FINISH+DESC+",
+    "asc_eng_v": "ORDER+BY+ENG_V+ASC+",
+    "desc_eng_v": "ORDER+BY+ENG_V+DESC+",
+    "asc_year": "ORDER+BY+YEAR+ASC+",
+    "desc_year": "ORDER+BY+YEAR+DESC+",
+    "asc_auc_date": "ORDER+BY+AUCTION_DATE+ASC+",
+    "desc_auc_date": "ORDER+BY+AUCTION_DATE+DESC+",
 }
 
 
@@ -241,17 +245,21 @@ class FilteredCarListView(BaseListView, TemplateResponseMixin):
         page_obj = get_page(paginator=paginator, page_number=page_number)
 
         ordering_params = [
-            ("new", "Сначала новые"),
-            ("old", "Сначала старые"),
-            ("low_eng_v", "С низким объемом"),
-            ("high_eng_v", "С высоким объемом"),
+            ("asc_mileage", "Пробег: по возрастанию"),
+            ("desc_mileage", "Пробег: по убыванию"),
+            ("asc_price", "Стоимость: по возрастанию"),
+            ("desc_price", "Стоимость: по убыванию"),
+            ("asc_eng_v", "Объем: по возрастанию"),
+            ("desc_eng_v", "Объем: по убыванию"),
+            ("asc_year", "Год: по возрастанию"),
+            ("desc_year", "Год: по убыванию"),
         ]
 
         if self.table == "stats":
             ordering_params.extend(
                 [
-                    ("new_auc_date", "С наиболее свежей датой аукциона"),
-                    ("old_auc_date", "С наиболее давней датой аукциона"),
+                    ("asc_auc_date", "Дата аукциона: по возрастанию"),
+                    ("desc_auc_date", "Дата аукциона: по убыванию"),
                 ]
             )
 

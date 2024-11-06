@@ -81,9 +81,9 @@ def update_currency_rate():
         currency.date = response.get("date")
         currency.usd = response.get("usd")
         currency.eur = response.get("eur")
-        currency.jpy = response.get("jpy")
-        currency.krw = response.get("krw")
-        currency.cny = response.get("cny") * 100
+        currency.jpy = response.get("jpy") / 100
+        currency.krw = response.get("krw") / 1000
+        currency.cny = response.get("cny")
         currency.save()
     except Exception as e:
         print("Что-то не так с парсингом валют")

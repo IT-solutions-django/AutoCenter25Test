@@ -193,7 +193,7 @@ def sendFeedBack(request):
 class CarsChina(FilteredCarListView):
     form_filter = CarChinaFilterForm
     link_url = "car_list_china"
-    title = "Каталог Китай"
+    title = "Каталог авто из Китая"
     car_link = "car_china"
     table = "china"
     url_api = "/api/cars/china/"
@@ -202,7 +202,7 @@ class CarsChina(FilteredCarListView):
 class CarsKorea(FilteredCarListView):
     form_filter = CarKoreaFilterForm
     link_url = "car_list_korea"
-    title = "Каталог Корея"
+    title = "Каталог авто из Кореи"
     car_link = "car_korea"
     url_api = "/api/cars/korea/"
     table = 'main'
@@ -211,7 +211,7 @@ class CarsKorea(FilteredCarListView):
 class CarsJapan(FilteredCarListView):
     form_filter = CarJapanFilterForm
     link_url = "car_list_japan"
-    title = "Каталог Япония"
+    title = "Каталог авто из Японии"
     table = "stats"
     car_link = "car_japan"
     url_api = "/api/cars/japan/"
