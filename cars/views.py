@@ -13,6 +13,7 @@ import asyncio
 from django.views.decorators.http import require_GET
 from cars.currency import start_process
 from cars.get_json_api import get_car
+from utils.get_user_ip import get_user_ip
 
 asyncio.run(start_process())
 
@@ -110,7 +111,7 @@ def sitemap(request):
 
 
 def main(request):
-    ip = "45.84.177.55"
+    ip = get_user_ip(request)
     api_url = 'http://78.46.90.228/api/?ip={ip}&code=A25nhGfE56Kd&sql=select+*+from+{table}+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+{default_filter}+{filter}limit+{offset},{limit}'
     url = api_url.format(
         table='stats',

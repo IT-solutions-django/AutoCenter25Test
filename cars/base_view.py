@@ -8,6 +8,7 @@ from .forms import FeedbackForm
 from .paginator import CustomPaginator, get_page
 from .get_json_api import get_count, get_car
 from .models import CarMark, Privod, Color, BaseFilter
+from utils.get_user_ip import get_user_ip
 
 ORDERING = {
     "asc_mileage": "ORDER+BY+MILEAGE+ASC+",
@@ -99,8 +100,6 @@ class FilteredCarListView(BaseListView, TemplateResponseMixin):
     }
 
     filter = ""
-
-    ip = "45.84.177.55"
 
     def update_sql(self):
         get_params = self.request.GET
@@ -195,21 +194,18 @@ class FilteredCarListView(BaseListView, TemplateResponseMixin):
         return self.form_filter(self.request.GET or None)
 
     def count_page(self, get_default_filter):
-        # if self.table == 'stats':
-        #     get_default_filter = generate_default_filter("Япония")
-        # elif self.table == 'main':
-        #     get_default_filter = generate_default_filter("Корея")
-        # elif self.table == 'china':
-        #     get_default_filter = generate_default_filter("Китай")
+        ip = get_user_ip(self.request)
 
         total_cars_response = requests.get(
             self.url_api_count.format(
-                table=self.table, filter=self.filter, ip=self.ip, default_filter=get_default_filter
+                table=self.table, filter=self.filter, ip=ip, default_filter=get_default_filter
             )
         ).text
         return get_count(total_cars_response)
 
     def get_context_data(self, **kwargs):
+        ip = get_user_ip(self.request)
+
         if self.table == 'stats':
             get_default_filter = generate_default_filter("Япония")
             country = "Япония"
@@ -237,7 +233,7 @@ class FilteredCarListView(BaseListView, TemplateResponseMixin):
             table=self.table,
             default_filter=get_default_filter,
             filter=self.filter,
-            ip=self.ip,
+            ip=ip,
             page_number=page_number
         )
 
@@ -304,12 +300,13 @@ class CarDetailView(DetailView):
         '+and+MARKA_NAME+=+"{brand}"'
         "+limit+0,4"
     )
-    ip = "45.84.177.55"
 
     country = None
     recommendations = []
 
     def get_object(self):
+        ip = get_user_ip(self.request)
+
         _, path, car_id = self.request.get_full_path().split("/")
 
         if path == "car_japan":
@@ -323,7 +320,7 @@ class CarDetailView(DetailView):
             self.api_url.format(
                 car_id=car_id,
                 table=table,
-                ip=self.ip,
+                ip=ip,
             )
         ).text
         obj = get_car(html_text, table)[0]
@@ -335,7 +332,7 @@ class CarDetailView(DetailView):
             self.api_url_recommendations.format(
                 brand=obj["brand"],
                 table=table,
-                ip=self.ip,
+                ip=ip,
                 default_filter=default_filter
             )
         ).text

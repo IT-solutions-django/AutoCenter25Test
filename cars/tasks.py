@@ -10,10 +10,11 @@ from cars.models import (
     Reviews
 )
 from cars.base_view import generate_default_filter
+from core.settings import SERVER_IP
 
 URL_COUNTRY = {
-    'URL_CHINA': 'http://78.46.90.228/api/?ip=45.84.177.55&code=A25nhGfE56Kd&sql=select+distinct+PRIV+from+china+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+YEAR+>=+2008+limit+{},25',
-    'URL_JAPAN': 'http://78.46.90.228/api/?ip=45.84.177.55&code=A25nhGfE56Kd&sql=select+distinct+PRIV+from+stats+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+YEAR+>=+2008+limit+{},25'
+    'URL_CHINA': 'http://78.46.90.228/api/?ip={}&code=A25nhGfE56Kd&sql=select+distinct+PRIV+from+china+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+YEAR+>=+2008+limit+{},25',
+    'URL_JAPAN': 'http://78.46.90.228/api/?ip={}&code=A25nhGfE56Kd&sql=select+distinct+PRIV+from+stats+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+YEAR+>=+2008+limit+{},25'
 }
 
 
@@ -24,8 +25,10 @@ def fetch(url):
 
 
 def process_car_data(url, page=1):
+    ip = SERVER_IP
+
     perpage = (page - 1) * 25
-    response_text = fetch(url.format(perpage))
+    response_text = fetch(url.format(ip, perpage))
 
     try:
         soup = BeautifulSoup(response_text, "lxml-xml")
@@ -96,10 +99,12 @@ def fetch_parse_currency():
     print("Загрузка завершена!")
 
 
-URL = 'http://78.46.90.228/api/?ip=45.84.177.55&code=A25nhGfE56Kd&sql=select+distinct+MARKA_NAME,MODEL_NAME+from+{}+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+{}+limit+{},25'
+URL = 'http://78.46.90.228/api/?ip={}&code=A25nhGfE56Kd&sql=select+distinct+MARKA_NAME,MODEL_NAME+from+{}+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+{}+limit+{},25'
 
 
 def get_car(table="", page=1):
+    ip = SERVER_IP
+
     if table == 'china':
         country = 'Китай'
     elif table == 'main':
@@ -111,7 +116,7 @@ def get_car(table="", page=1):
 
     default_filter = generate_default_filter(country)
 
-    url = URL.format(table, default_filter, perpage)
+    url = URL.format(ip, table, default_filter, perpage)
 
     response_text = fetch(url)
 

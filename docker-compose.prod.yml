@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./media:/usr/src/app/media
+      - ./staticfiles:/usr/src/app/staticfiles
+
+  redis:
+     image: redis
+     command: redis-server /usr/local/etc/redis/redis.conf
+     restart: unless-stopped
+     volumes:
+       - .:/usr/local/etc/redis/redis.conf
+     ports:
+       - "6379:6379"
+
+  celery:
+     build: .
+     command: celery -A core worker -Q celery -l info
+     restart: unless-stopped
+     depends_on:
+       - redis
+     volumes:
+       - .:/usr/src/app
+       - ./media:/usr/src/app/media
+     links:
+       - redis
+
+  celery-beat:
+     build: .
+     command: celery -A core beat -l info
+     restart: unless-stopped
+     depends_on:
+       - redis
+     volumes:
+       - .:/usr/src/app
+       - ./media:/usr/src/app/media
+     links:
+       - redis
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./staticfiles:/staticfiles
+      - ./media:/media
+    depends_on:
+      - backend
+
