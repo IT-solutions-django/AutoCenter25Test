@@ -5,7 +5,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - "8000:8000"
     depends_on:
@@ -15,7 +15,7 @@ services:
     build: .
     command: celery -A core worker --loglevel=info
     volumes:
-      - .:/app
+      - .:/usr/src/app
     depends_on:
       - redis
 
@@ -23,7 +23,7 @@ services:
     build: .
     command: celery -A core beat --loglevel=info
     volumes:
-      - .:/app
+      - .:/usr/src/app
     depends_on:
       - redis
 

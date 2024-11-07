@@ -93,8 +93,8 @@
 
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
     <div class="col pe-1">
-        <div class="dropdown" style="left:-3px">
-            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="mileage_min-dropdown">
+        <div class="dropdown" style="left:-3px; margin-right: -14px;">
+            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="mileage_min-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
                 <span class="float-start" data-def="Пробег авто">
                     {% with value=filter_form.mileage_min.value %}
                         {% if value %}
@@ -121,10 +121,10 @@
         </div>
         {{ filter_form.mileage_min }}
     </div>
-
+	<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
     <div class="col ps-1">
-        <div class="dropdown" style="right:-3px">
-            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="mileage_max-dropdown">
+        <div class="dropdown" style="right:-3px; margin-left: -11px;">
+            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="mileage_max-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
                 <span class="float-start" data-def="Пробег авто">
                     {% with value=filter_form.mileage_max.value %}
                         {% if value %}
@@ -154,8 +154,8 @@
 </div>
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
     <div class="col pe-1">
-        <div class="dropdown" style="left:-3px">
-            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="engine_volume_min-dropdown">
+        <div class="dropdown" style="left:-3px; margin-right: -14px;">
+            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="engine_volume_min-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
                 <span class="float-start" data-def="Объем двигателя">
                         {% if eng_min %}
                             {{ eng_min }}
@@ -180,10 +180,10 @@
         </div>
         {{ filter_form.engine_volume_min }}
     </div>
-
+	<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
     <div class="col ps-1">
-        <div class="dropdown" style="right:-3px">
-            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="engine_volume_max-dropdown">
+        <div class="dropdown" style="right:-3px; margin-left: -11px;">
+            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="engine_volume_max-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
                 <span class="float-start" data-def="Объем двигателя">
                         {% if eng_max %}
                             {{ eng_max }}
@@ -243,8 +243,8 @@
 
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
     <div class="col pe-1">
-        <div class="dropdown" style="left:-3px">
-            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="year_min-dropdown">
+        <div class="dropdown" style="left:-3px; margin-right: -14px;">
+            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="year_min-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
                 <span class="float-start" data-def="Год автомобиля">
                         {% with value=filter_form.year_min.value %}
                         {% if value %}
@@ -271,10 +271,10 @@
         </div>
         {{ filter_form.year_min }}
     </div>
-
+	<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
     <div class="col ps-1">
-        <div class="dropdown" style="right:-3px">
-            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="year_max-dropdown">
+        <div class="dropdown" style="right:-3px; margin-left: -11px;">
+            <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="year_max-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
                 <span class="float-start" data-def="Год автомобиля">
                         {% with value=filter_form.year_max.value %}
                         {% if value %}
@@ -366,8 +366,8 @@
 
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
 								<div class="col pe-1">
-								<div class="dropdown" style="left:-3px">
-									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="color-dropdown">
+								<div class="dropdown" style="left:-3px; margin-right: -14px;">
+									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="color-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
 										<span class="float-start" data-def="Цвет">
 											{% if color %}
 												{{ color }}
@@ -392,9 +392,10 @@
 								</div>
 								{{ filter_form.color }}
 							</div>
+								<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
 								<div class="col ps-1">
-								<div class="dropdown" style="right:-3px">
-									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="rate-dropdown">
+								<div class="dropdown" style="right:-3px; margin-left: -11px;">
+									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="rate-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
 										<span class="float-start" data-def="Рейтинг">
 											{% with value=filter_form.rate.value %}
 												{% if value %}
@@ -821,6 +822,7 @@
   .dropdown-menu.show {
   	border-radius: 12px;
   	padding: 12px 16px;
+  	border: none;
   }
 
 
