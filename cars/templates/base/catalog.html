@@ -9,6 +9,11 @@
     <h2>{{title}}</h2>
 
 	<div class="row row-col-1" style="padding-right: calc(1.5rem * .5) !important; padding-left: calc(1.5rem * .5) !important">
+		<button class="col mob-btn-sorting" data-bs-target="#ordering-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" viewBox="0 0 16 13" fill="none">
+				<path d="M7 6C7 6.16576 6.93415 6.32473 6.81694 6.44194C6.69973 6.55915 6.54076 6.625 6.375 6.625H0.75C0.58424 6.625 0.425269 6.55915 0.308058 6.44194C0.190848 6.32473 0.125 6.16576 0.125 6C0.125 5.83424 0.190848 5.67527 0.308058 5.55806C0.425269 5.44085 0.58424 5.375 0.75 5.375H6.375C6.54076 5.375 6.69973 5.44085 6.81694 5.55806C6.93415 5.67527 7 5.83424 7 6ZM0.75 1.625H11.375C11.5408 1.625 11.6997 1.55915 11.8169 1.44194C11.9342 1.32473 12 1.16576 12 1C12 0.83424 11.9342 0.675269 11.8169 0.558058C11.6997 0.440848 11.5408 0.375 11.375 0.375H0.75C0.58424 0.375 0.425269 0.440848 0.308058 0.558058C0.190848 0.675269 0.125 0.83424 0.125 1C0.125 1.16576 0.190848 1.32473 0.308058 1.44194C0.425269 1.55915 0.58424 1.625 0.75 1.625ZM5.125 10.375H0.75C0.58424 10.375 0.425269 10.4408 0.308058 10.5581C0.190848 10.6753 0.125 10.8342 0.125 11C0.125 11.1658 0.190848 11.3247 0.308058 11.4419C0.425269 11.5592 0.58424 11.625 0.75 11.625H5.125C5.29076 11.625 5.44973 11.5592 5.56694 11.4419C5.68415 11.3247 5.75 11.1658 5.75 11C5.75 10.8342 5.68415 10.6753 5.56694 10.5581C5.44973 10.4408 5.29076 10.375 5.125 10.375ZM14.9422 8.68281C14.8841 8.6247 14.8152 8.5786 14.7393 8.54715C14.6635 8.5157 14.5821 8.49951 14.5 8.49951C14.4179 8.49951 14.3365 8.5157 14.2607 8.54715C14.1848 8.5786 14.1159 8.6247 14.0578 8.68281L12 10.7414V4.75C12 4.58424 11.9342 4.42527 11.8169 4.30806C11.6997 4.19085 11.5408 4.125 11.375 4.125C11.2092 4.125 11.0503 4.19085 10.9331 4.30806C10.8158 4.42527 10.75 4.58424 10.75 4.75V10.7414L8.69219 8.68281C8.57491 8.56554 8.41585 8.49965 8.25 8.49965C8.08415 8.49965 7.92509 8.56554 7.80781 8.68281C7.69054 8.80009 7.62465 8.95915 7.62465 9.125C7.62465 9.29085 7.69054 9.44991 7.80781 9.56719L10.9328 12.6922C10.9909 12.7503 11.0598 12.7964 11.1357 12.8279C11.2115 12.8593 11.2929 12.8755 11.375 12.8755C11.4571 12.8755 11.5385 12.8593 11.6143 12.8279C11.6902 12.7964 11.7591 12.7503 11.8172 12.6922L14.9422 9.56719C15.0003 9.50914 15.0464 9.44021 15.0779 9.36434C15.1093 9.28846 15.1255 9.20713 15.1255 9.125C15.1255 9.04287 15.1093 8.96154 15.0779 8.88566C15.0464 8.80979 15.0003 8.74086 14.9422 8.68281Z" fill="#303030"/>
+			</svg>
+		</button>
         <button type="button" class="col mob-btn-options" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			Параметры
         </button>
@@ -93,7 +98,7 @@
 
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
     <div class="col pe-1">
-        <div class="dropdown" style="left:-3px; margin-right: -14px;">
+        <div class="dropdown" style="left:-3px; margin-right: -3px;">
             <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="mileage_min-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
                 <span class="float-start" data-def="Пробег авто">
                     {% with value=filter_form.mileage_min.value %}
@@ -109,6 +114,7 @@
 						<path d="M10.9536 1.35378L5.95364 6.35378C5.9072 6.40027 5.85206 6.43715 5.79136 6.46231C5.73066 6.48748 5.6656 6.50043 5.59989 6.50043C5.53418 6.50043 5.46912 6.48748 5.40842 6.46231C5.34772 6.43715 5.29257 6.40027 5.24614 6.35378L0.246137 1.35378C0.152317 1.25996 0.0996094 1.13272 0.0996094 1.00003C0.0996094 0.867352 0.152317 0.740104 0.246137 0.646284C0.339958 0.552463 0.467205 0.499756 0.599887 0.499756C0.732569 0.499756 0.859817 0.552463 0.953637 0.646284L5.59989 5.29316L10.2461 0.646284C10.2926 0.599829 10.3477 0.562978 10.4084 0.537837C10.4691 0.512696 10.5342 0.499756 10.5999 0.499756C10.6656 0.499756 10.7306 0.512696 10.7913 0.537837C10.852 0.562978 10.9072 0.599829 10.9536 0.646284C11.0001 0.692739 11.0369 0.747889 11.0621 0.808586C11.0872 0.869282 11.1002 0.934336 11.1002 1.00003C11.1002 1.06573 11.0872 1.13079 11.0621 1.19148C11.0369 1.25218 11.0001 1.30733 10.9536 1.35378Z" fill="#757575"/>
 					</svg>
 				</span>
+				<span style="position:absolute; z-index:1; right: -3px;">|</span>
             </a>
             <ul class="dropdown-menu w-100">
                 {% for choice in filter_form.mileage_min.field.choices %}
@@ -121,7 +127,6 @@
         </div>
         {{ filter_form.mileage_min }}
     </div>
-	<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
     <div class="col ps-1">
         <div class="dropdown" style="right:-3px; margin-left: -11px;">
             <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="mileage_max-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
@@ -154,7 +159,7 @@
 </div>
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
     <div class="col pe-1">
-        <div class="dropdown" style="left:-3px; margin-right: -14px;">
+        <div class="dropdown" style="left:-3px; margin-right: -3px;">
             <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="engine_volume_min-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
                 <span class="float-start" data-def="Объем двигателя">
                         {% if eng_min %}
@@ -168,6 +173,7 @@
 						<path d="M10.9536 1.35378L5.95364 6.35378C5.9072 6.40027 5.85206 6.43715 5.79136 6.46231C5.73066 6.48748 5.6656 6.50043 5.59989 6.50043C5.53418 6.50043 5.46912 6.48748 5.40842 6.46231C5.34772 6.43715 5.29257 6.40027 5.24614 6.35378L0.246137 1.35378C0.152317 1.25996 0.0996094 1.13272 0.0996094 1.00003C0.0996094 0.867352 0.152317 0.740104 0.246137 0.646284C0.339958 0.552463 0.467205 0.499756 0.599887 0.499756C0.732569 0.499756 0.859817 0.552463 0.953637 0.646284L5.59989 5.29316L10.2461 0.646284C10.2926 0.599829 10.3477 0.562978 10.4084 0.537837C10.4691 0.512696 10.5342 0.499756 10.5999 0.499756C10.6656 0.499756 10.7306 0.512696 10.7913 0.537837C10.852 0.562978 10.9072 0.599829 10.9536 0.646284C11.0001 0.692739 11.0369 0.747889 11.0621 0.808586C11.0872 0.869282 11.1002 0.934336 11.1002 1.00003C11.1002 1.06573 11.0872 1.13079 11.0621 1.19148C11.0369 1.25218 11.0001 1.30733 10.9536 1.35378Z" fill="#757575"/>
 					</svg>
 				</span>
+				<span style="position:absolute; z-index:1; right: -3px;">|</span>
             </a>
             <ul class="dropdown-menu w-100">
                 {% for choice in filter_form.engine_volume_min.field.choices %}
@@ -180,7 +186,6 @@
         </div>
         {{ filter_form.engine_volume_min }}
     </div>
-	<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
     <div class="col ps-1">
         <div class="dropdown" style="right:-3px; margin-left: -11px;">
             <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="engine_volume_max-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
@@ -243,7 +248,7 @@
 
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
     <div class="col pe-1">
-        <div class="dropdown" style="left:-3px; margin-right: -14px;">
+        <div class="dropdown" style="left:-3px; margin-right: -3px;">
             <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="year_min-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
                 <span class="float-start" data-def="Год автомобиля">
                         {% with value=filter_form.year_min.value %}
@@ -259,6 +264,7 @@
 						<path d="M10.9536 1.35378L5.95364 6.35378C5.9072 6.40027 5.85206 6.43715 5.79136 6.46231C5.73066 6.48748 5.6656 6.50043 5.59989 6.50043C5.53418 6.50043 5.46912 6.48748 5.40842 6.46231C5.34772 6.43715 5.29257 6.40027 5.24614 6.35378L0.246137 1.35378C0.152317 1.25996 0.0996094 1.13272 0.0996094 1.00003C0.0996094 0.867352 0.152317 0.740104 0.246137 0.646284C0.339958 0.552463 0.467205 0.499756 0.599887 0.499756C0.732569 0.499756 0.859817 0.552463 0.953637 0.646284L5.59989 5.29316L10.2461 0.646284C10.2926 0.599829 10.3477 0.562978 10.4084 0.537837C10.4691 0.512696 10.5342 0.499756 10.5999 0.499756C10.6656 0.499756 10.7306 0.512696 10.7913 0.537837C10.852 0.562978 10.9072 0.599829 10.9536 0.646284C11.0001 0.692739 11.0369 0.747889 11.0621 0.808586C11.0872 0.869282 11.1002 0.934336 11.1002 1.00003C11.1002 1.06573 11.0872 1.13079 11.0621 1.19148C11.0369 1.25218 11.0001 1.30733 10.9536 1.35378Z" fill="#757575"/>
 					</svg>
 				</span>
+				<span style="position:absolute; z-index:1; right: -3px;">|</span>
             </a>
             <ul class="dropdown-menu w-100">
                 {% for choice in filter_form.year_min.field.choices %}
@@ -271,7 +277,6 @@
         </div>
         {{ filter_form.year_min }}
     </div>
-	<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
     <div class="col ps-1">
         <div class="dropdown" style="right:-3px; margin-left: -11px;">
             <a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="year_max-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
@@ -366,7 +371,7 @@
 
 							<div class="row gx-3" style="margin-left:0; margin-right:0;">
 								<div class="col pe-1">
-								<div class="dropdown" style="left:-3px; margin-right: -14px;">
+								<div class="dropdown" style="left:-3px; margin-right: -3px;">
 									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="color-dropdown" style="border-radius: 0; border-top-left-radius: 12px; border-bottom-left-radius: 12px;">
 										<span class="float-start" data-def="Цвет">
 											{% if color %}
@@ -380,6 +385,7 @@
 												<path d="M10.9536 1.35378L5.95364 6.35378C5.9072 6.40027 5.85206 6.43715 5.79136 6.46231C5.73066 6.48748 5.6656 6.50043 5.59989 6.50043C5.53418 6.50043 5.46912 6.48748 5.40842 6.46231C5.34772 6.43715 5.29257 6.40027 5.24614 6.35378L0.246137 1.35378C0.152317 1.25996 0.0996094 1.13272 0.0996094 1.00003C0.0996094 0.867352 0.152317 0.740104 0.246137 0.646284C0.339958 0.552463 0.467205 0.499756 0.599887 0.499756C0.732569 0.499756 0.859817 0.552463 0.953637 0.646284L5.59989 5.29316L10.2461 0.646284C10.2926 0.599829 10.3477 0.562978 10.4084 0.537837C10.4691 0.512696 10.5342 0.499756 10.5999 0.499756C10.6656 0.499756 10.7306 0.512696 10.7913 0.537837C10.852 0.562978 10.9072 0.599829 10.9536 0.646284C11.0001 0.692739 11.0369 0.747889 11.0621 0.808586C11.0872 0.869282 11.1002 0.934336 11.1002 1.00003C11.1002 1.06573 11.0872 1.13079 11.0621 1.19148C11.0369 1.25218 11.0001 1.30733 10.9536 1.35378Z" fill="#757575"/>
 											</svg>
 										</span>
+										<span style="position:absolute; z-index:1; right: -3px;">|</span>
 									</a>
 									<ul class="dropdown-menu w-100">
 										{% for choice in filter_form.color.field.choices %}
@@ -392,7 +398,6 @@
 								</div>
 								{{ filter_form.color }}
 							</div>
-								<span style="display: flex; width: 0%; background-color: rgb(128, 127, 127); height: 80%; font-weight: 1; font-size: 1px;">|</span>
 								<div class="col ps-1">
 								<div class="dropdown" style="right:-3px; margin-left: -11px;">
 									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="rate-dropdown" style="border-radius: 0; border-top-right-radius: 12px; border-bottom-right-radius: 12px;">
@@ -433,13 +438,18 @@
 					</form>
 					<div class="dropdown ordering__filter-select" id="ordering-dropdown" style="margin-top:20px;">
 						<button class="btn btn-secondary dropdown-toggle ordering__filter-select--btn" id="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="float-end">
+								<svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M10.9536 1.35378L5.95364 6.35378C5.9072 6.40027 5.85206 6.43715 5.79136 6.46231C5.73066 6.48748 5.6656 6.50043 5.59989 6.50043C5.53418 6.50043 5.46912 6.48748 5.40842 6.46231C5.34772 6.43715 5.29257 6.40027 5.24614 6.35378L0.246137 1.35378C0.152317 1.25996 0.0996094 1.13272 0.0996094 1.00003C0.0996094 0.867352 0.152317 0.740104 0.246137 0.646284C0.339958 0.552463 0.467205 0.499756 0.599887 0.499756C0.732569 0.499756 0.859817 0.552463 0.953637 0.646284L5.59989 5.29316L10.2461 0.646284C10.2926 0.599829 10.3477 0.562978 10.4084 0.537837C10.4691 0.512696 10.5342 0.499756 10.5999 0.499756C10.6656 0.499756 10.7306 0.512696 10.7913 0.537837C10.852 0.562978 10.9072 0.599829 10.9536 0.646284C11.0001 0.692739 11.0369 0.747889 11.0621 0.808586C11.0872 0.869282 11.1002 0.934336 11.1002 1.00003C11.1002 1.06573 11.0872 1.13079 11.0621 1.19148C11.0369 1.25218 11.0001 1.30733 10.9536 1.35378Z" fill="#757575"></path>
+								</svg>
+							</span>
 							{% if now_ordering %}
 							{{ now_ordering }}
 							{% else %}
 							Сортировка
 							{% endif %}
 						</button>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" id="dropdown-menu">
 							{% for ordering_param in ordering_params %}
 								<li><a class="dropdown-item" href="?{% for key, value in request.GET.items %}{% if key != 'page' and key != 'ordering' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1&ordering={{ ordering_param.0 }}">{{ ordering_param.1 }}</a></li>
 							{% endfor %}
@@ -803,21 +813,68 @@
     display: none;
     font-size: 14px !important;
     font-weight: 700 !important;
-    padding: 14px 95px;
+    padding: 11px 95px;
     color: #FFFFFF;
     border-radius: 12px;
     border: 0px;
     background-color: #303030;
+    margin-left: 8px;
   }
 
-  .ordering__filter-select {
-		margin-left: 30px;
-	}
+  .mob-btn-sorting {
+  	display: none;
+    max-width: 44px;
+    max-height: 44px;
+    border-radius: 12px;
+    background-color: #F8F8F8;
+    color: #F8F8F8;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+  }
 
   .ordering__filter-select--btn {
-   padding: 12px 20px;
+   padding: 12px 25px;
    border-radius: 12px;
+   background-color: #F8F8F8;
+   color: black;
+   border: 1px solid #F8F8F8;
   }
+
+  .ordering__filter-select--btn .float-end {
+  	padding-left: 25px;
+  }
+
+	.ordering__filter-select--btn:hover {
+		background-color: #F8F8F8;
+		color: black;
+		border: 1px solid #F8F8F8;
+	}
+
+	.ordering__filter-select--btn::after {
+		display: none !important;
+	}
+
+	.ordering__filter-select--btn:focus,
+	.ordering__filter-select--btn:active,
+	.ordering__filter-select--btn:focus:active
+	.ordering__filter-select--btn:focus-visible {
+		color: black;
+		background-color: #F8F8F8;
+		border: 1px solid #F8F8F8;
+		box-shadow: none;
+		outline: none;
+		transition: none !important;
+	}
+
+	.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+		color: black;
+		background-color: #F8F8F8;
+		border: 1px solid #F8F8F8;
+		box-shadow: none;
+		outline: none;
+		transition: none !important;
+	}
 
   .dropdown-menu.show {
   	border-radius: 12px;
@@ -828,8 +885,7 @@
 
   @media (max-width: 576px) {
   	.ordering__filter-select {
-  		margin-left: 25px;
-  		margin-bottom: 10px;
+  		display: none;
   	}
 
     .modal-header {
@@ -865,6 +921,10 @@
   
     .mob-btn-options {
       display: inline-block;
+    }
+
+    .mob-btn-sorting {
+    	display: inline-block;
     }
 
     .buttons-filter a {

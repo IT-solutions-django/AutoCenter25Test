@@ -709,8 +709,8 @@ header button {
 
 .mini-catalog .marg-row .col, .catalog .marg-row .col {
     margin-bottom: calc(.5rem * .75 * 2);
-    padding-right: calc(.5rem * .75);
-    padding-left: calc(.5rem * .75);
+    padding-right: calc(.9rem * .75);
+    padding-left: calc(.9rem * .75);
 }
 
 .auto-card img {
