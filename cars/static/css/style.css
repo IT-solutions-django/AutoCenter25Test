@@ -464,7 +464,7 @@ header button {
     position: absolute;
     bottom: calc(50% - 20px);
     transform: translateY(50%);
-    right: -88px;
+    right: -70px;
     width: 65%;
     z-index: 5;
 }

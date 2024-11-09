@@ -48,17 +48,9 @@
   <link type="image/x-icon" href="{%static 'img/favicon.ico' %}" rel="icon" />
   {% compress css %}
   <link type="text/css" href="{%static 'css/style.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" href="{%static 'vendor/bootstrap.css' %}">
+  <link rel="stylesheet" href="{%static 'vendor/slick.css' %}">
   {% endcompress %}
-  <link
-          type="text/css"
-          href="{%static 'vendor/bootstrap.css' %}"
-          rel="stylesheet"
-  />
-  <link
-          type="text/css"
-          href="{%static 'vendor/slick.css' %}"
-          rel="stylesheet"
-  />
   <link
           type="text/css"
           href="{%static 'vendor/aos.css' %}"
@@ -77,6 +69,7 @@
   <script
           type="text/javascript"
           src="{%static 'vendor/jquery.js' %}"
+          defer
   ></script>
 
   <script defer type="text/javascript">
@@ -323,6 +316,7 @@
                       style="max-width: 110px; max-height: 80px"
                       src="{% static 'img/about-logo.webp' %}"
                       alt="logo"
+                      loading="lazy"
               />
             </a>
           </div>
