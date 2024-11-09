@@ -60,7 +60,7 @@ def generate_default_filter(country):
 
     status_condition = f'STATUS+=+"{base_filter.status}"' if base_filter.status else ''
     year_condition = f'YEAR+>=+{base_filter.year}' if base_filter.year else ''
-    engine_volume_condition = f'ENG_V+>+{base_filter.eng_v}' if base_filter.eng_v != '' else ''
+    engine_volume_condition = f'ENG_V+>+{base_filter.eng_v}+and+ENG_V+<=+{base_filter.max_eng_v * 1000}' if base_filter.eng_v != '' and base_filter.max_eng_v != '' else ''
     mileage_condition = f'MILEAGE+<=+{base_filter.mileage}' if base_filter.mileage else ''
     finish_condition = f'FINISH+>+{base_filter.finish}' if base_filter.finish else ''
     kpp_condition = kpp_condition

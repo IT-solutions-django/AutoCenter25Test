@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "cars",
     "rest_framework",
-    "debug_toolbar"
+    "debug_toolbar",
+    "compressor"
 ]
 
 MIDDLEWARE = [
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.gzip.GZipMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -147,6 +149,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -157,3 +165,6 @@ INTERNAL_IPS = [
 ]
 
 SERVER_IP = "188.225.27.50"
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True

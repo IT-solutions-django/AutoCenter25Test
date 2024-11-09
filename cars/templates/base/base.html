@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
 <head>
@@ -45,7 +46,9 @@
   />
 
   <link type="image/x-icon" href="{%static 'img/favicon.ico' %}" rel="icon" />
+  {% compress css %}
   <link type="text/css" href="{%static 'css/style.css' %}" rel="stylesheet" />
+  {% endcompress %}
   <link
           type="text/css"
           href="{%static 'vendor/bootstrap.css' %}"
@@ -76,8 +79,7 @@
           src="{%static 'vendor/jquery.js' %}"
   ></script>
 
-  <!-- Yandex.Metrika counter -->
-  <script type="text/javascript">
+  <script defer type="text/javascript">
     (function (m, e, t, r, i, k, a) {
       m[i] =
         m[i] ||
@@ -119,10 +121,9 @@
       /></div
     >
   </noscript>
-  <!-- /Yandex.Metrika counter -->
 
-  <script src="//code.jivo.ru/widget/qwNpQLwlCr" async></script>
-  
+  <script src="//code.jivo.ru/widget/qwNpQLwlCr" async defer></script>
+
 </head>
 
 
@@ -279,45 +280,11 @@
                   </svg>
                 </a>
               </li>
-              <!--<li>
-                <a
-                  class="btn-social-header__instagram"
-                  target="_blank"
-                  href="https://www.instagram.com/autocenter.25?igsh=MXd3czdvaHUwd2ZpZg%3D%3D&utm_source=qr"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_5437_16553)">
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M11.977 0H12.0316C18.642 0 24.0007 5.36035 24.0007 11.9727V12.0273C24.0007 18.6397 18.642 24 12.0316 24H11.977C5.36658 24 0.0078125 18.6397 0.0078125 12.0273V11.9727C0.0078125 5.36035 5.36658 0 11.977 0ZM8.28992 4.88272H15.714C17.765 4.88272 19.4336 6.55178 19.4336 8.60342V15.3974C19.4336 17.449 17.765 19.1181 15.714 19.1181H8.28992C6.23888 19.1181 4.57031 17.449 4.57031 15.3974V8.60342C4.57031 6.55178 6.23888 4.88272 8.28992 4.88272ZM8.28992 6.19527C6.96263 6.19527 5.88247 7.27574 5.88247 8.60342V15.3974C5.88247 16.7251 6.96263 17.8055 8.28992 17.8055H15.714C17.0413 17.8055 18.1215 16.7251 18.1215 15.3974V8.60342C18.1215 7.27574 17.0413 6.19527 15.714 6.19527H8.28992ZM15.4627 11.9995C15.4627 13.9082 13.9101 15.4604 12.0028 15.4604C10.0947 15.4604 8.54297 13.9082 8.54297 11.9995C8.54297 10.0908 10.0947 8.53867 12.0028 8.53867C13.911 8.53867 15.4627 10.0908 15.4627 11.9995ZM14.1505 12.0004C14.1505 10.8156 13.1872 9.85205 12.0028 9.85205C10.8184 9.85205 9.85513 10.8156 9.85513 12.0004C9.85513 13.1851 10.8184 14.1487 12.0028 14.1487C13.1872 14.1487 14.1505 13.1851 14.1505 12.0004ZM15.7838 9.09783C16.2974 9.09783 16.716 8.67993 16.716 8.16534C16.716 7.65075 16.2982 7.23285 15.7838 7.23285C15.2693 7.23285 14.8516 7.65075 14.8516 8.16534C14.8516 8.67993 15.2693 9.09783 15.7838 9.09783Z"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_5437_16553">
-                        <rect
-                          width="23.9929"
-                          height="24"
-                          fill="white"
-                          transform="translate(0.0078125)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </a>
-              </li>-->
             </div>
             <li class="social">
               <a href="tel:88005501720" class="nav-link p-0">
                 8 800 550 17 20<br />
               </a>
-              <!--<span>Звонок по РФ бесплатный</span>-->
 				<span class="footer-wp-top">
 				<a
 				  style="font-size: 16px; font-weight: 400; line-height: 16.94px; text-decoration: none;"

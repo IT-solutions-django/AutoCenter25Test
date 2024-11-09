@@ -304,6 +304,13 @@ class BaseFilter(models.Model):
         verbose_name="объем двигателя",
         help_text="строго больше какого значения (л)",
     )
+    max_eng_v = models.DecimalField(
+        max_digits=3,
+        decimal_places=1,
+        verbose_name='максимальный объем двигателя',
+        help_text='меньше или равно какого значения (л)',
+        default=5
+    )
     mileage = models.PositiveIntegerField(
         verbose_name="пробег",
         help_text="меньше или равен какому значению",

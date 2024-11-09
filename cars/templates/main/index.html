@@ -56,7 +56,7 @@
 		<div class="col">
               <div class="auto-card">
 				<a href="/car_japan/{{car.api_id}}">
-                  <img src="{{car.photos.0}}" alt="{{car.brand}} {{car.model}}">
+                  <img src="{{car.photos.0}}" alt="{{car.brand}} {{car.model}}" loading="lazy">
 				  </a>
                   <div class="car-info">
                       <h3 class="my-0">{{car.brand}} {{car.model}}</h3>
@@ -399,9 +399,9 @@
 					  <div class="d-flex flex-row">
 						  <div class="review-img">
                               {% if review.icon_user %}
-							  <img src="{{review.icon_user}}" class="review-img" alt="review">
+							  <img src="{{review.icon_user}}" class="review-img" alt="review" loading="lazy">
                               {% else %}
-                              <img src="/media/user/phoro_user/0c3c22da-32c9-11ef-a698-31ca6a59cdec.webp" class="review-img" alt="review">
+                              <img src="/media/user/phoro_user/0c3c22da-32c9-11ef-a698-31ca6a59cdec.webp" class="review-img" alt="review" loading="lazy">
                               {% endif %}
 						  </div>
 						  <div class="client-info">
@@ -419,13 +419,13 @@
 						  <div class="row row-cols-2" style="margin-bottom: 10px; margin-top: 10px;">
                             {% if review.image1 %}
 							<div class="col review-photo">
-								<img src="{{review.image1}}">
+								<img src="{{review.image1}}" loading="lazy">
 							</div>
                             {% endif %}
 
                             {% if review.image2 %}
 							<div class="col review-photo">
-								<img src="{{review.image2}}">
+								<img src="{{review.image2}}" loading="lazy">
 							</div>
                             {% endif %}
 						  </div>
