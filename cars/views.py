@@ -111,18 +111,7 @@ def sitemap(request):
 
 
 def main(request):
-    ip = get_user_ip(request)
-    api_url = 'http://78.46.90.228/api/?ip={ip}&code=A25nhGfE56Kd&sql=select+*+from+{table}+WHERE+1+=+1+and+AUCTION+NOT+LIKE+"%USS%"+and+{default_filter}+{filter}limit+{offset},{limit}'
-    url = api_url.format(
-        table='stats',
-        filter='',
-        default_filter=generate_default_filter('Япония'),
-        limit=4,
-        offset=0,
-        ip=ip,
-    )
-    res_text = get(url).text
-    cars = get_car(res_text, 'stats')
+    cars = CarMainPage.objects.all()[:4]
 
     data = {"feedbackForm": FeedbackForm(), "cars": cars,
             "reviews": Reviews.objects.all()}

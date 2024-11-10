@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load intspace %}
+{% load engine_volume_format %}
 {% block content %}
 
 <div data-aos="fade-up">
@@ -55,12 +56,12 @@
 		{% for car in cars %}
 		<div class="col">
               <div class="auto-card">
-				<a href="/car_japan/{{car.api_id}}">
-                  <img src="{{car.photos.0}}" alt="{{car.brand}} {{car.model}}" loading="lazy">
+				<a href="/cars/{{car.id}}">
+                  <img src="{{ car.photos.all.0.image.url }}" alt="{{car.brand}} {{car.model}}" loading="lazy">
 				  </a>
                   <div class="car-info">
                       <h3 class="my-0">{{car.brand}} {{car.model}}</h3>
-                      <p>{{car.year}} • {{car.engine_volume}} л • {{car.drive}} • {{car.transmission}}</p>
+                      <p>{{car.year}} • {{car.engine_volume|engine_volume_format}} л • {{car.drive}} • {{car.transmission}}</p>
                       <div class="d-flex flex-sm-row flex-column justify-content-between align-items-sm-center align-items-start">
                           <span class="mb-sm-0 mb-2">{{car.price|intspace}} ₽</span>
                           <button class="btn submit-app"  data-bs-toggle="modal" data-bs-target="#mainFeedBackModal" onclick="setModalInput('Я заинтересовался автомобилем {{car.brand}} {{car.model}} {{car.year}}')">Оставить заявку</button>

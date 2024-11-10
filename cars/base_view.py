@@ -371,7 +371,7 @@ class CarKoreaMainView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["feedbackForm"] = FeedbackForm()
-        context["country"] = "Корея"
+        context["country"] = "Япония"
         context["recommendations"] = self.model.objects.order_by("?")[:4]
 
         return context
