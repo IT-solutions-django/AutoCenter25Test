@@ -2,6 +2,7 @@ from collections import defaultdict
 from .calculate_car_price import get_config, calc_price
 from bs4 import BeautifulSoup
 from .models import Currency, ColorTag, PrivodTag
+from commission.models import Commission
 
 
 def get_car(html_text: str, table: str):
@@ -34,6 +35,8 @@ def get_car(html_text: str, table: str):
     for priv_tag in priv_tags:
         priv_tags_dict[priv_tag.name] = priv_tag.privod.name
 
+    commission = Commission.objects.get(country=country)
+
     for row in rows:
         price_finish = int(row.find("FINISH").text)
 
@@ -60,17 +63,30 @@ def get_car(html_text: str, table: str):
             "engine_volume": f"{engine_volume:.2f}"[:-1],
             "drive": priv_tags_dict[row.find("PRIV").text],
             "mileage": row.find("MILEAGE").text,
-            "rate": row.find('RATE').text
+            "rate": row.find('RATE').text,
+            "finish_price": price,
+            "commission": commission,
+            "currency": currency
         }
         try:
-            car["price"], car["toll"], car['outside'] = calc_price(
+            car["price"] = calc_price(
                 price=price,
                 currency=currency,
                 year=int(row.find("YEAR").text),
                 volume=int(row.find("ENG_V").text),
                 table=table,
-                conf=config
-            )
+                conf=config,
+                commission=commission
+            )[0]
+            car['customs_duty'] = calc_price(
+                price=price,
+                currency=currency,
+                year=int(row.find("YEAR").text),
+                volume=int(row.find("ENG_V").text),
+                table=table,
+                conf=config,
+                commission=commission
+            )[1]
         except:
             car["price"] = 0
         car["photos"] = row.find("IMAGES").text.replace("=50", "").split("#")

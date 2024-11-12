@@ -2,10 +2,18 @@
 {% load static %}
 {% load humanize %}
 {% load intspace %}
+{% load price_filters %}
 
 {% block content %}
 
 <section class="catalog">
+	<p class="routing">
+        <a href="/">Главная</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12.5" viewBox="0 0 5 9" fill="none">
+            <path d="M0.765521 0.484478L4.51552 4.23448C4.55039 4.26931 4.57805 4.31066 4.59692 4.35619C4.61579 4.40171 4.6255 4.45051 4.6255 4.49979C4.6255 4.54907 4.61579 4.59787 4.59692 4.64339C4.57805 4.68892 4.55039 4.73028 4.51552 4.7651L0.765521 8.5151C0.695156 8.58547 0.59972 8.625 0.500208 8.625C0.400697 8.625 0.305261 8.58547 0.234896 8.5151C0.164531 8.44474 0.125 8.3493 0.125 8.24979C0.125 8.15028 0.164531 8.05484 0.234896 7.98448L3.72005 4.49979L0.234895 1.0151C0.200054 0.980262 0.172417 0.9389 0.153561 0.893377C0.134705 0.847855 0.125 0.799064 0.125 0.749791C0.125 0.700518 0.134705 0.651727 0.153561 0.606205C0.172417 0.560682 0.200054 0.51932 0.234895 0.484478C0.269737 0.449637 0.3111 0.422 0.356622 0.403144C0.402144 0.384288 0.450935 0.374582 0.500208 0.374582C0.549481 0.374582 0.598272 0.384288 0.643794 0.403144C0.689317 0.422 0.730679 0.449637 0.765521 0.484478Z" fill="#757575"/>
+        </svg>
+        <a href="{{ request.path }}">Автомобили из {{ from_routing }}</a>
+    </p>
     <h2>{{title}}</h2>
 
 	<div class="row row-col-1" style="padding-right: calc(1.5rem * .5) !important; padding-left: calc(1.5rem * .5) !important">
@@ -67,7 +75,7 @@
 
 							<div class="col">
 								<div class="dropdown">
-									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="model-dropdown">
+									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="model-dropdown" disabled>
 										<span class="float-start" data-def="Модель авто">
 											{% with value=filter_form.model.value %}
 												{% if value %}
@@ -311,7 +319,11 @@
 
 							<div class="col">
 								<div class="dropdown">
-									<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="transmission-dropdown">
+									{% if country == 'Корея' %}
+									<a class="btn filter-item disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="transmission-dropdown" disabled>
+										{% else %}
+										<a class="btn filter-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="transmission-dropdown">
+											{% endif %}
 										<span class="float-start" data-def="Тип КПП">
 											{% if kpp %}
 												{{ kpp }}
@@ -466,9 +478,15 @@
         {% for car in cars %}
             <div class="col">
                 <div class="auto-card">
+					{% if country != 'Корея' %}
                     <a href="/{{ car_link }}/{{car.api_id}}">
                         <img src="{{car.photos.0}}" class="image-placeholder" alt="{{car.brand}} {{car.model}}">
                     </a>
+					{% else %}
+					<a href="/{{ car_link }}/{{car.id}}">
+                        <img src="{{car.photos.all.0.image.url}}" class="image-placeholder" alt="{{car.brand}} {{car.model}}">
+                    </a>
+					{% endif %}
                     <div class="car-info">
                         <h3 class="my-0">{{car.brand}} {{car.model}}</h3>
                         <p>{{car.year}} • {{car.engine_volume}} л •
@@ -487,7 +505,7 @@
                         <div class="d-flex justify-content-between align-items-center adapt-auto-info">
                             <span class="mb-sm-0 mb-2">
 								{% if car.price != 0 %}
-									{{car.price|intspace}} ₽
+									{{car.price | format_price}} ₽
 								{% else %}
 									Уточнить цену
 								{%endif%}
@@ -575,8 +593,13 @@
     }
 
     var brand = getBrandFromURL();
+    var modelDropdown = document.getElementById('model-dropdown');
 	if (brand) {
         fetchModels(brand);
+    }
+    else {
+    	modelDropdown.classList.add('disabled');
+        modelDropdown.setAttribute('disabled', true);
     }
 
     function fetchModels(brand) {
@@ -587,6 +610,9 @@
 			element.remove();
 		});
 		var dropdownMenu = document.querySelector('#model-dropdown + .dropdown-menu.w-100');
+
+		modelDropdown.classList.remove('disabled');
+   		modelDropdown.removeAttribute('disabled');
 
 
         // Очистка старых опций в select, кроме "Любое"
@@ -677,6 +703,8 @@
                 // Очистка select с name="model"
                 var select = document.querySelector('[name="model"]');
 				setField('model', "Модель авто", "Модель авто");
+				modelDropdown.classList.add('disabled');
+        		modelDropdown.setAttribute('disabled', true);
             }
 			else {
                 fetchModels(value);
@@ -711,6 +739,24 @@
 </script>
 
 <style>
+	.routing {
+        margin-bottom: 25px;
+    }
+    .routing svg {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    .catalog .routing a {
+        text-decoration: none;
+        color: #757575;
+    }
+	.btn.filter-item.disabled {
+        background-color: #ebebeb !important;
+        cursor: not-allowed;
+        pointer-events: none;
+        border: none;
+    }
+
     .hidden-select {
         display: none;
     }
@@ -749,6 +795,11 @@
     color: #FFFFFF;
   }
 
+  .not-found-car .btn:hover {
+  	color: #FFFFFF !important;
+    background-color: #EB1C24 !important;
+  }
+
   .catalog {
     margin-bottom: 189px;
   }
@@ -768,9 +819,11 @@
     border-radius: 12px;
   }
 
-  .buttons-filter button:hover {
-    color: #FFFFFF;
-    background-color: #EB1C24;
+  .buttons-filter button:hover,
+  .buttons-filter button:active,
+  .buttons-filter button:focus {
+    color: #FFFFFF !important;
+    background-color: #EB1C24 !important;
   }
 
   .buttons-filter a {
@@ -831,6 +884,11 @@
     font-size: 14px;
     font-weight: bold;
     border: none;
+  }
+
+  .dropdown-item:focus, .dropdown-item:hover {
+  	color: #EB1C24;
+  	background-color: white;
   }
 
   .ordering__filter-select--btn {

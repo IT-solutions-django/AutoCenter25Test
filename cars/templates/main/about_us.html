@@ -14,35 +14,34 @@
     <div class="about-us__general col-md-6 col-12">
       <h4>Телефон</h4>
       <p>
-        <a href="tel:+79294201720"> +7 929-420-17-20 </a>
+        <a href="tel:+79294201720"> {{ data_about.phone }} </a>
       </p>
 
       <h4>Электроная почта</h4>
       <p>
         <a href="mailto:autocenter25.corp@gmail.com"
-          >autocenter25.corp@gmail.com</a
+          >{{ data_about.email }}</a
         >
       </p>
 
       <h4>График работы</h4>
-      <span>ПН-ПТ</span>
-      <p>10:00 - 19:00</p>
-      <span>СБ-ВС</span>
+      <span>{{ data_about.working_days }}</span>
+      <p>{{ data_about.working_time }}</p>
+      <span>{{ data_about.weekends }}</span>
       <p>Выходной</p>
 
       <h4>Адрес офиса</h4>
       <p>
-        Приморский край, г. Владивосток <br />
-        ул. Океанский проспект д. 70в, оф. 18
+        {{ data_about.address|linebreaksbr }}
       </p>
 
       <h4>Проложить маршрут</h4>
       <div class="row">
         <p class="col-2">
-          <a href="https://go.2gis.com/v69yh" target="_blank">2GIS</a>
+          <a href="{{ data_about.gis }}" target="_blank">2GIS</a>
         </p>
         <p class="col-2">
-          <a href="https://yandex.ru/maps/-/CDfkyNNP" target="_blank"
+          <a href="{{ data_about.yandex_map }}" target="_blank"
             >Яндекс.Карты</a
           >
         </p>
@@ -50,29 +49,27 @@
     </div>
     <div class="about-us__bank col-md-6 col-12">
       <h4>Расчётный счёт</h4>
-      <p>40702810450000041514</p>
+      <p>{{ data_about.current_account }}</p>
 
       <h4>Название банка</h4>
-      <p>ПАО Сбербанк</p>
+      <p>{{ data_about.name_bank }}</p>
 
       <h4>БИК</h4>
-      <p>040813608</p>
+      <p>{{ data_about.bik }}</p>
 
       <h4>Корреспондентский счёт</h4>
-      <p>30101810600000000608</p>
+      <p>{{ data_about.correspondent_account }}</p>
 
       <h4>Наименование</h4>
       <p>
-        Генеральный директор
-        <br />
-        Казаченко Андрей Евгеньевич
+        {{ data_about.denomination|linebreaksbr }}
       </p>
 
       <h4>ИНН/КПП</h4>
-      <p>2543112695/254001001</p>
+      <p>{{ data_about.inn }}</p>
 
       <h4>ОГРН</h4>
-      <p>1172536018973</p>
+      <p>{{ data_about.ogrn }}</p>
     </div>
   </div>
 </section>

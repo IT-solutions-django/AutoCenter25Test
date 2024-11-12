@@ -6,7 +6,7 @@ def get_tof(price: int, cars_tof: list[dict]):
     for interval in cars_tof:
         if (
                 interval["price_interval"][0]
-                <= price
+                < price
                 <= float(interval["price_interval"][1])
         ):
             return interval["tof"]
@@ -58,13 +58,12 @@ def get_config():
     return conf
 
 
-def calc_price(price, currency, year, volume, table, conf):
+def calc_price(price, currency, year, volume, table, conf, commission):
     try:
         price = int(price)
         year = int(year)
         volume = int(volume)
 
-        commission = conf["table_settings"][table]["commission"]
         one_rub_currency = conf["table_settings"][table]["currency"]
         if one_rub_currency == 'jpy':
             one_rub = currency.jpy
@@ -89,10 +88,29 @@ def calc_price(price, currency, year, volume, table, conf):
 
         yts = get_yts(age, volume, conf["cars_yts"])
 
-        toll = duty + tof + yts + commission
+        toll = duty + tof + yts
 
-        full_price = toll + price_rus
-        outside = round(full_price / 1000) * 1000 - round(toll / 1000) * 1000
-        return round(full_price / 1000) * 1000, round(toll / 1000) * 1000, outside
+        sanctions_japan_commission = 0
+
+        if table == "stats" and volume > 1800:
+            commission_delivery = commission.japan_sanction_commission
+            sanctions_japan_commission = (
+                    price_rus / 100 * commission.japan_sanction_percent
+            )
+        elif table == "korea" and price > 30_000_000:
+            commission_delivery = commission.korea_sanction_commission
+        else:
+            commission_delivery = commission.commission_delivery
+
+        full_commission = (
+                commission_delivery * one_rub
+                + commission.commission_broker
+                + commission.commission_storage
+                + commission.commission
+                + sanctions_japan_commission
+        )
+
+        full_price = toll + price_rus + full_commission
+        return round(full_price, 2), (int(duty), int(tof), int(yts))
     except Exception as e:
         print(e)

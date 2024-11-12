@@ -1,4 +1,6 @@
 import datetime
+
+from django.db.models import Q
 from django.views.generic.list import BaseListView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateResponseMixin
@@ -7,8 +9,9 @@ import requests
 from .forms import FeedbackForm
 from .paginator import CustomPaginator, get_page
 from .get_json_api import get_count, get_car
-from .models import CarMark, Privod, Color, BaseFilter
+from .models import CarMark, Privod, Color, BaseFilter, CarKorea
 from utils.get_user_ip import get_user_ip
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 ORDERING = {
     "asc_mileage": "ORDER+BY+MILEAGE+ASC+",
@@ -280,7 +283,8 @@ class FilteredCarListView(BaseListView, TemplateResponseMixin):
             "eng_max": eng_max,
             "country": country,
             "ordering_params": ordering_params,
-            "now_ordering": ordering_params_dict[now_ordering]
+            "now_ordering": ordering_params_dict[now_ordering],
+            "from_routing": self.from_routing
         }
 
     def get(self, request, *args, **kwargs):
@@ -350,6 +354,9 @@ class CarDetailView(DetailView):
         context["feedbackForm"] = FeedbackForm()
         context["country"] = self.country
         context["recommendations"] = self.recommendations
+        context["from_routing"] = self.from_routing
+        context["from_routing_url"] = self.from_routing_url
+        context['modal_price'] = True
 
         return context
 
@@ -370,8 +377,189 @@ class CarKoreaMainView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context["feedbackForm"] = FeedbackForm()
-        context["country"] = "Япония"
+        context["country"] = self.country
         context["recommendations"] = self.model.objects.order_by("?")[:4]
+        context["from_routing"] = self.from_routing
+        context["from_routing_url"] = self.from_routing_url
+        context['modal_price'] = False
 
         return context
+
+
+class FilteredCarKoreaListView(BaseListView, TemplateResponseMixin):
+    template_name = "base/catalog.html"
+    context_object_name = "cars"
+    paginate_by = 8
+    link_url = None
+    title = None
+    car_link = None
+    url_api = None
+
+    TRANSMISSION_CHOICES = {
+        "": "",
+        "2": "Автомат",
+        "1": "Механика",
+    }
+
+    filter = ""
+
+    def update_sql(self):
+        get_params = self.request.GET
+        self.filter = Q()
+
+        if get_params.get("brand"):
+            selected_brand_id = get_params["brand"]
+            brand_name = CarMark.objects.get(id=selected_brand_id).name
+            self.filter &= Q(brand=brand_name)
+        else:
+            brand_name = None
+
+        if get_params.get("model"):
+            model_name = get_params["model"]
+            self.filter &= Q(model=model_name)
+
+        if get_params.get("color"):
+            selected_color_id = get_params["color"]
+            selected_color = Color.objects.prefetch_related('tags_color').get(id=selected_color_id)
+            color_tags = [tag.name for tag in selected_color.tags_color.all()]
+            self.filter &= Q(color__name__in=color_tags)
+        else:
+            selected_color = None
+
+        if get_params.get("mileage_min"):
+            mileage = int(get_params["mileage_min"].replace(" ", ""))
+            self.filter &= Q(mileage__gte=mileage)
+
+        if get_params.get("mileage_max"):
+            mileage = int(get_params["mileage_max"].replace(" ", ""))
+            self.filter &= Q(mileage__lte=mileage)
+
+        if get_params.get("year_min"):
+            year_min = get_params['year_min']
+            self.filter &= Q(year__gte=year_min)
+
+        if get_params.get("year_max"):
+            year_max = get_params['year_max']
+            self.filter &= Q(year__lte=year_max)
+
+        if get_params.get("drive"):
+            selected_drive_id = get_params["drive"]
+            selected_drive = Privod.objects.get(id=selected_drive_id)
+
+            if selected_drive.name == 'Полный':
+                other_drives = Privod.objects.prefetch_related('tags_priv').exclude(id=selected_drive_id)
+            else:
+                other_drives = Privod.objects.filter(id=selected_drive_id)
+
+            priv_tags = list({tag.name for drive in other_drives for tag in drive.tags_priv.all()})
+
+            if priv_tags:
+                if selected_drive.name == 'Полный':
+                    self.filter &= ~Q(drive__name__in=priv_tags)
+                else:
+                    self.filter &= Q(drive__name__in=priv_tags)
+        else:
+            selected_drive = None
+
+        if get_params.get("engine_volume_min"):
+            eng_min = int(get_params["engine_volume_min"].replace(" ", ""))
+            eng_min_float = f'{eng_min / 1000:.1f}'
+            self.filter &= Q(engine_volume__gte=eng_min)
+        else:
+            eng_min_float = ''
+
+        if get_params.get("engine_volume_max"):
+            eng_max = int(get_params["engine_volume_max"].replace(" ", ""))
+            eng_max_float = f'{eng_max / 1000:.1f}'
+            self.filter &= Q(engine_volume__lte=eng_max)
+        else:
+            eng_max_float = ''
+
+        if get_params.get("ordering"):
+            now_ordering = get_params.get("ordering")
+            cars = CarKorea.objects.filter(self.filter).order_by(ORDERING[now_ordering])
+        else:
+            now_ordering = ''
+            cars = CarKorea.objects.filter(self.filter)
+
+        return brand_name, selected_drive, selected_color, eng_min_float, eng_max_float, now_ordering, cars
+
+    def filter_form(self):
+        return self.form_filter(self.request.GET or None)
+
+    def get_context_data(self, **kwargs):
+        if self.table == 'stats':
+            country = "Япония"
+        elif self.table == 'main':
+            country = "Корея"
+        elif self.table == 'china':
+            country = "Китай"
+
+        brand, priv, color, eng_min, eng_max, now_ordering, cars = self.update_sql()
+
+        if priv is not None:
+            priv = priv.name
+
+        if color is not None:
+            color = color.name
+
+        per_page = self.paginate_by
+
+        page_number = int(self.request.GET.get("page", 1))
+
+        paginator = Paginator(cars, per_page)
+        try:
+            page_obj = paginator.page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
+        ordering_params = [
+            ("asc_mileage", "Пробег: по возрастанию"),
+            ("desc_mileage", "Пробег: по убыванию"),
+            ("asc_price", "Стоимость: по возрастанию"),
+            ("desc_price", "Стоимость: по убыванию"),
+            ("asc_eng_v", "Объем: по возрастанию"),
+            ("desc_eng_v", "Объем: по убыванию"),
+            ("asc_year", "Год: по возрастанию"),
+            ("desc_year", "Год: по убыванию"),
+        ]
+
+        if self.table == "stats":
+            ordering_params.extend(
+                [
+                    ("asc_auc_date", "Дата аукциона: по возрастанию"),
+                    ("desc_auc_date", "Дата аукциона: по убыванию"),
+                ]
+            )
+
+        ordering_params_dict = {key: value for key, value in ordering_params}
+        ordering_params_dict[""] = ""
+
+        return {
+            "page_obj": page_obj,
+            "is_paginated": page_obj.has_other_pages(),
+            "cars": page_obj.object_list,
+            "filter_form": self.filter_form(),
+            "link_url": self.link_url,
+            "feedbackForm": FeedbackForm(),
+            "title": self.title,
+            "car_link": self.car_link,
+            "url_api": self.url_api,
+            "brand_name": brand,
+            "priv": priv,
+            "color": color,
+            "eng_min": eng_min,
+            "eng_max": eng_max,
+            "country": country,
+            "ordering_params": ordering_params,
+            "now_ordering": ordering_params_dict[now_ordering],
+            "from_routing": self.from_routing
+        }
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        return self.render_to_response(context)

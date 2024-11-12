@@ -1,9 +1,21 @@
-{% extends 'base/base.html' %} 
-{% load static %} 
-{% load intspace %} 
+{% extends 'base/base.html' %}
+{% load static %}
+{% load intspace %}
+{% load price_filters %}
 {% block content %}
 
 <section class="car-card">
+    <p class="routing">
+        <a href="/">Главная</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12.5" viewBox="0 0 5 9" fill="none">
+            <path d="M0.765521 0.484478L4.51552 4.23448C4.55039 4.26931 4.57805 4.31066 4.59692 4.35619C4.61579 4.40171 4.6255 4.45051 4.6255 4.49979C4.6255 4.54907 4.61579 4.59787 4.59692 4.64339C4.57805 4.68892 4.55039 4.73028 4.51552 4.7651L0.765521 8.5151C0.695156 8.58547 0.59972 8.625 0.500208 8.625C0.400697 8.625 0.305261 8.58547 0.234896 8.5151C0.164531 8.44474 0.125 8.3493 0.125 8.24979C0.125 8.15028 0.164531 8.05484 0.234896 7.98448L3.72005 4.49979L0.234895 1.0151C0.200054 0.980262 0.172417 0.9389 0.153561 0.893377C0.134705 0.847855 0.125 0.799064 0.125 0.749791C0.125 0.700518 0.134705 0.651727 0.153561 0.606205C0.172417 0.560682 0.200054 0.51932 0.234895 0.484478C0.269737 0.449637 0.3111 0.422 0.356622 0.403144C0.402144 0.384288 0.450935 0.374582 0.500208 0.374582C0.549481 0.374582 0.598272 0.384288 0.643794 0.403144C0.689317 0.422 0.730679 0.449637 0.765521 0.484478Z" fill="#757575"/>
+        </svg>
+        <a href="/{{ from_routing_url }}/">Автомобили из {{ from_routing }}</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12.5" viewBox="0 0 5 9" fill="none">
+            <path d="M0.765521 0.484478L4.51552 4.23448C4.55039 4.26931 4.57805 4.31066 4.59692 4.35619C4.61579 4.40171 4.6255 4.45051 4.6255 4.49979C4.6255 4.54907 4.61579 4.59787 4.59692 4.64339C4.57805 4.68892 4.55039 4.73028 4.51552 4.7651L0.765521 8.5151C0.695156 8.58547 0.59972 8.625 0.500208 8.625C0.400697 8.625 0.305261 8.58547 0.234896 8.5151C0.164531 8.44474 0.125 8.3493 0.125 8.24979C0.125 8.15028 0.164531 8.05484 0.234896 7.98448L3.72005 4.49979L0.234895 1.0151C0.200054 0.980262 0.172417 0.9389 0.153561 0.893377C0.134705 0.847855 0.125 0.799064 0.125 0.749791C0.125 0.700518 0.134705 0.651727 0.153561 0.606205C0.172417 0.560682 0.200054 0.51932 0.234895 0.484478C0.269737 0.449637 0.3111 0.422 0.356622 0.403144C0.402144 0.384288 0.450935 0.374582 0.500208 0.374582C0.549481 0.374582 0.598272 0.384288 0.643794 0.403144C0.689317 0.422 0.730679 0.449637 0.765521 0.484478Z" fill="#757575"/>
+        </svg>
+        <a href="{{ request.path }}">{{ car.brand }} {{ car.model }}, {{ car.year }} г.</a>
+    </p>
   <h1>{{ car.brand }} {{ car.model }}, {{ car.year }} г.</h1>
   <div class="row g-0">
     <div class="col-md-6 col-sm-12">
@@ -11,27 +23,31 @@
         <div class="gallery">
           <div class="main-slides">
             {% for photo in car.img %}
-			
+
             <img
               src="{{photo}}"
               alt="{{ car.brand }} {{ car.model }}"
-              class="gallery-slide slide-{{ forloop.counter0 }} gallery__Image" 
+              class="gallery-slide slide-{{ forloop.counter0 }} gallery__Image image"
 			  data-large="{{photo}}"
 			  style="cursor: pointer;"
             />
-			
+
             {% endfor %}
 
-            <p class="slides-counter">
+            <p class="slides-counter" style="display: none !important;">
               <span class="curr-slide-count">0</span> /
               <span class="all-slides-count">8</span>
             </p>
 			
             <div class="previous-slide-button slider-controller-button">
-              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none">
+                <path d="M1.13045 9.38045L9.88045 0.630449C9.96175 0.549152 10.0583 0.484667 10.1645 0.44067C10.2707 0.396671 10.3845 0.374025 10.4995 0.374025C10.6145 0.374025 10.7283 0.396671 10.8345 0.44067C10.9408 0.484667 11.0373 0.549152 11.1186 0.630449C11.1999 0.711746 11.2644 0.80826 11.3084 0.914478C11.3524 1.0207 11.375 1.13454 11.375 1.24951C11.375 1.36448 11.3524 1.47833 11.3084 1.58455C11.2644 1.69077 11.1999 1.78728 11.1186 1.86858L2.98655 9.99951L11.1186 18.1305C11.2828 18.2946 11.375 18.5173 11.375 18.7495C11.375 18.9817 11.2828 19.2044 11.1186 19.3686C10.9544 19.5328 10.7317 19.625 10.4995 19.625C10.2673 19.625 10.0446 19.5328 9.88045 19.3686L1.13045 10.6186C1.0491 10.5373 0.984558 10.4408 0.940524 10.3346C0.89649 10.2284 0.873827 10.1145 0.873827 9.99951C0.873827 9.88452 0.89649 9.77066 0.940524 9.66444C0.984558 9.55822 1.0491 9.46171 1.13045 9.38045Z" fill="white"/>
+              </svg>
             </div>
             <div class="next-slide-button slider-controller-button">
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none">
+                <path d="M10.8695 10.6195L2.11955 19.3696C2.03825 19.4508 1.94174 19.5153 1.83552 19.5593C1.7293 19.6033 1.61546 19.626 1.50049 19.626C1.38552 19.626 1.27167 19.6033 1.16545 19.5593C1.05923 19.5153 0.96272 19.4508 0.881424 19.3696C0.800127 19.2883 0.735639 19.1917 0.691642 19.0855C0.647645 18.9793 0.625 18.8655 0.625 18.7505C0.625 18.6355 0.647645 18.5217 0.691642 18.4155C0.735639 18.3092 0.800127 18.2127 0.881424 18.1314L9.01346 10.0005L0.881424 1.86955C0.717238 1.70536 0.625 1.48268 0.625 1.25049C0.625 1.01829 0.717238 0.79561 0.881424 0.631424C1.04561 0.467238 1.26829 0.375 1.50049 0.375C1.73268 0.375 1.95536 0.467238 2.11955 0.631424L10.8695 9.38142C10.9509 9.46269 11.0154 9.55919 11.0595 9.66541C11.1035 9.77164 11.1262 9.8855 11.1262 10.0005C11.1262 10.1155 11.1035 10.2293 11.0595 10.3356C11.0154 10.4418 10.9509 10.5383 10.8695 10.6195Z" fill="white"/>
+              </svg>
             </div>
           </div>
           <div class="thumbnail-slides"></div>
@@ -40,6 +56,76 @@
     </div>
 
 <style>
+    .slider-controller-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .previous-slide-button {
+        left: 10px;
+    }
+    .previous-slide-button svg, .next-slide-button svg {
+        height: 28px;
+        width: 16px;
+        filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.7));
+    }
+    .next-slide-button {
+        right: 10px;
+    }
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+}
+.close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10000;
+}
+.close-btn:hover {
+    color: red;
+}
+.fullscreen-prev-btn, .fullscreen-next-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 10000;
+}
+.fullscreen-prev-btn svg, .fullscreen-next-btn svg {
+    height: 28px;
+    width: 16px;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.7));
+}
+.fullscreen-prev-btn {
+    left: 20px;
+}
+
+.fullscreen-next-btn {
+    right: 20px;
+}
+
+.fullscreen-prev-btn:hover, .fullscreen-next-btn:hover {
+    color: red;
+}
 
 .asyncGallery {
   position: fixed;
@@ -68,7 +154,7 @@
   overflow: hidden;
   transform: translate(-50%, -50%);
   transition: opacity 200ms, visibility 200ms;
-  
+
 }
 
 .asyncGallery__Item.is-visible {
@@ -290,28 +376,28 @@
         keyboardNavigation: true,
         hiddenElements: []
       };
-      
-  
+
+
       Object.assign(this.settings, settings);
-  
+
       this.gallery = null;
       this.index = 0;
-      
-      
+
+
 
       this.items = [...document.querySelectorAll(this.settings.images)];
-      
+
       this.elem=[]
-      
-      
+
+
       // this.items = [...document.querySelectorAll(this.settings.images)]
       this.addedItems = {};
-  
+
       this.touch = {
         endX: 0,
         startX: 0
       };
-  
+
       this.init();
       this.log()
     }
@@ -319,74 +405,74 @@
     log() {
       console.log("Initial");
     }
-  
+
     get loading() {
       return !this.settings.hiddenElements.includes("loader");
     }
-  
+
     get dotsVisible() {
       return !this.settings.hiddenElements.includes("dots");
     }
-  
+
     init() {
       this.clearUncomplete();
       this.createElements();
       this.bindEvents();
-      
+
     }
-  
+
     clearUncomplete() {
       this.items = this.items.filter(item => {
         if (item.classList.contains("CORRECT") == true) {
           return item
         }
-        // return item.dataset.large 
+        // return item.dataset.large
       });
     }
-  
+
     createElements() {
       this.gallery = document.createElement("DIV");
       this.gallery.classList.add("asyncGallery");
-  
+
       this.createSingleElement({
         element: "prev",
         type: "BUTTON",
         event: "click",
         func: this.getPrevious
       });
-  
+
       this.createSingleElement({
         element: "next",
         type: "BUTTON",
         event: "click",
         func: this.getNext
       });
-  
+
       this.createSingleElement({
         element: "close",
         type: "BUTTON",
         event: "click",
         func: this.closeGallery
       });
-  
+
       this.createSingleElement({
         element: "loader",
         type: "SPAN",
         text: "Loading..."
       });
-  
+
       this.createSingleElement({
         element: "counter",
         type: "SPAN",
         text: "0/0"
       });
-  
+
       this.createSingleElement({
         element: "dots",
         type: "UL",
         text: ""
       });
-  
+
       if (!this.settings.hiddenElements.includes("dots")) {
         this.items.forEach((item, i) => {
           let dot = document.createElement("LI");
@@ -397,15 +483,15 @@
             this.index = i;
             this.getItem(i);
           });
-  
+
           dot.append(button);
           this.dots.append(dot);
         });
       }
-  
+
       window.document.body.append(this.gallery);
     }
-  
+
     createSingleElement({ element, type, event = "click", func, text }) {
       if (!this.settings.hiddenElements.includes(element)) {
         if (!this.settings[element]) {
@@ -419,22 +505,22 @@
           this[element] = document.querySelector(this.settings[element]);
           this.gallery.append(this[element]);
         }
-  
+
         if (func) {
           this[element].addEventListener(event, func.bind(this));
         }
       }
     }
-  
+
     getItem(i, content = null) {
       let contentObj = content;
-    
+
       if (contentObj === null) {
         contentObj = {};
         contentObj.src = this.items[i].dataset.large;
         contentObj.description = this.items[i].dataset.description;
       }
-  
+
       if (!this.settings.hiddenElements.includes("counter")) {
         this.counter.innerHTML = `
             <span class="asyncGallery__Current">${this.index + 1}</span>${
@@ -442,43 +528,43 @@
         }<span class="asyncGallery__Current">${this.items.length}</span>
             `;
       }
-  
+
       if (!this.addedItems.hasOwnProperty(i)) {
         let image = document.createElement("IMG");
-  
+
         let galleryItem = document.createElement("DIV");
         galleryItem.classList.add("asyncGallery__Item");
-  
+
         if (this.loading) {
           this.loader.classList.add("is-visible");
         }
-  
+
         this.clearVisible();
-  
+
         if (this.dotsVisible) {
           this.gallery
             .querySelector(`.asyncGallery__Dots li[data-index="${i}"]`)
             .classList.add("is-active");
         }
-  
+
         image.src = contentObj.src;
         image.alt = "car";
-      
+
       galleryItem.innerHTML = `
       <div class="asyncGallery__ItemImage">
         ${image.outerHTML}
       </div>
       `;
-  
+
         this.gallery.append(galleryItem);
         this.addedItems[i] = galleryItem;
-  
+
         image.addEventListener("load", () => {
           this.addedItems[i].loaded = true;
           if (!this.gallery.querySelector(".asyncGallery__Item.is-visible")) {
             this.addedItems[i].classList.add("is-visible");
           }
-  
+
           if (this.loading) {
             this.loader.classList.remove("is-visible");
           }
@@ -493,47 +579,47 @@
         } else if (this.loading) {
           this.loader.classList.add("is-visible");
         }
-  
+
         if (this.dotsVisible) {
           this.gallery
             .querySelector(`.asyncGallery__Dots li[data-index="${i}"]`)
             .classList.add("is-active");
         }
       }
-  
+
       if (!this.settings.loop) {
         if (this.index === 0) this.prev.setAttribute("disabled", true);
         else this.prev.removeAttribute("disabled");
-  
+
         if (this.index === this.items.length - 1)
           this.next.setAttribute("disabled", true);
         else this.next.removeAttribute("disabled");
       }
     }
-  
+
     clearVisible() {
       if (this.gallery.querySelector(".asyncGallery__Item.is-visible")) {
         this.gallery
           .querySelector(".asyncGallery__Item.is-visible")
           .classList.remove("is-visible");
       }
-  
+
       if (this.gallery.querySelector(".asyncGallery__Dots li.is-active")) {
         this.gallery
           .querySelector(".asyncGallery__Dots li.is-active")
           .classList.remove("is-active");
       }
     }
-  
+
     closeGallery() {
       this.gallery.classList.remove("is-visible");
       this.clearVisible();
     }
-  
+
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-  
+
     handleGesure() {
       if (this.touch.endX > this.touch.startX + 20) {
         this.getPrevious();
@@ -541,7 +627,7 @@
         this.getNext();
       }
     }
-  
+
     getPrevious() {
       if (this.settings.loop) {
         this.index--;
@@ -554,7 +640,7 @@
         this.getItem(this.index);
       }
     }
-  
+
     getNext() {
       if (this.settings.loop) {
         this.index++;
@@ -567,7 +653,7 @@
         this.getItem(this.index);
       }
     }
-  
+
     bindEvents() {
       this.items.forEach((item, i) => {
         item.addEventListener("click", e => {
@@ -579,7 +665,7 @@
           });
         });
       });
-  
+
       document.addEventListener("keyup", e => {
         if (this.gallery.classList.contains("is-visible")) {
           if (e.key === "Escape") this.closeGallery();
@@ -589,7 +675,7 @@
           }
         }
       });
-  
+
       this.gallery.addEventListener(
         "touchstart",
         e => {
@@ -597,7 +683,7 @@
         },
         false
       );
-  
+
       this.gallery.addEventListener(
         "touchend",
         e => {
@@ -608,8 +694,8 @@
       );
     }
   }
-  
-  
+
+
   </script>
 
 
@@ -682,36 +768,17 @@
           </div>
             {% endif %}
         </div>
-		
-		
+
+
 		<p class="car-price col-12 order-md-3 order-1">
 			{% if car.price %} 
-				от {{ car.price | intspace }} ₽
+				от {{ car.price | format_price }} ₽
 			{% else %}
 				Уточнить цену
-			{% endif %} 
+			{% endif %}
 		</p>
-		
-        {% if car.toll %}
-        <p class="car-value col-12 order-md-3 order-1" style="color: #757575">
-          Расходы по РФ: {{ car.toll | intspace }} ₽
-        </p>
-        {% endif %}
 
-		{% if car.outside %}
 			{% if country == "Япония" %}
-			<p class="car-value col-12 order-md-3 order-1" style="color: #757575">
-			  Расходы по Японии: {{ car.outside | intspace }} ₽
-			</p>
-			{% endif %}
-
-			{% if country == "Китай" %}
-			<p class="car-value col-12 order-md-3 order-1" style="color: #757575">
-			  Расходы по Китаю: {{ car.outside | intspace }} ₽
-			</p>
-			{% endif %}
-			
-			{% if country == "Япония" %} 
 				{% if car.engine_volume|add:"0" > 1900 %}
 				<p class="car-promotion col-12 order-md-3 order-1">
 				  Сроки доставки более ~2-3 месяца после покупки
@@ -720,15 +787,17 @@
 				<p class="car-promotion col-12 order-md-3 order-1">
 				  Сроки доставки более 2-3 недели после покупки
 				</p>
-				{% endif %} 
-			{% endif %} 
-			
+				{% endif %}
+			{% endif %}
+
 			{% if country == "Китай" %}
 			<p class="car-promotion col-12 order-md-3 order-1">
 			  Средний срок доставки 1 месяц
 			</p>
 			{% endif %}
-		{% endif %} 
+          {% if modal_price %}
+          <button class="price_model_opener" onclick="openPriceModal()" style="order: 3;">Подробный расчет</button>
+          {% endif %}
 
         <div class="order-md-4 order-4 car-wp__button-contact">
           <button
@@ -797,7 +866,10 @@
   </div>
 </section>
 
-{% include 'feedback.html' %} 
+{% include 'feedback.html' %}
+{% if modal_price %}
+{% include 'price_modal.html' %}
+{% endif %}
 
 <section>
   <h1>Вам может понравиться</h1>
@@ -815,8 +887,8 @@
 			<img src="/media/{{car_rec.photos.all.0}}" alt="car" />
 			{% endif %}
         </a>
-        {% endif %} 
-		
+        {% endif %}
+
 		{% if country == "Китай" %}
         <a href="/car_china/{{car_rec.api_id}}">
 			{% if car_rec.photos.0 %}
@@ -825,8 +897,8 @@
 			<img src="/media/{{car_rec.photos.all.0}}" alt="car" />
 			{% endif %}
         </a>
-        {% endif %} 
-		
+        {% endif %}
+
 		{% if country == "Корея" %}
         <a href="/cars/{{car_rec.api_id}}">
           <img src="/media/{{car_rec.photos.all.0}}" alt="car" />
@@ -835,20 +907,20 @@
 
         <div class="car-info">
           <h3 class="my-0">{{car_rec.brand}} {{car_rec.model}}</h3>
-          <p>{{car_rec.year}} • {{car_rec.engine_volume}} cc • 
+          <p>{{car_rec.year}} • {{car_rec.engine_volume}} cc •
 			{% if car_rec.drive %}
 				{{car_rec.drive}}
 			{% else %}
 				n/a
 			{% endif %}
-				• 
+				•
 			{% if car_rec.mileage %}
 				{{car_rec.mileage|intspace}} км
 			{% else %}
 				n/a
 			{% endif %}
 		  </p>
-		  
+
 		  <div class="d-flex justify-content-between align-items-center adapt-auto-info">
             <span class="mb-sm-0 mb-2">
 				{% if car_rec.price != 0 %}
@@ -858,8 +930,8 @@
 				{%endif%}
 			</span>
             <button class="btn submit-app"  data-bs-toggle="modal" data-bs-target="#mainFeedBackModal" onclick="setModalInput('Я заинтересовался автомобилем {{car.brand}} {{car.model}} {{car.year}}')">Оставить заявку</button>
-          </div>	  
-		  
+          </div>
+
         </div>
       </div>
     </div>
@@ -868,6 +940,38 @@
 </section>
 
 <style>
+    .price_model_opener {
+      margin-top: 20px;
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 21.78px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      width: 300px;
+      background-color:  #212529;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      margin-left: 0.75rem;
+    }
+    .price_model_opener:hover {
+        background-color: #EB1C24;
+    }
+    .routing {
+        margin-bottom: 25px;
+    }
+    .routing svg {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    .car-card .routing a {
+        text-decoration: none;
+        color: #757575;
+    }
   h1 {
     font-size: 32px;
     font-weight: 900;
@@ -887,6 +991,24 @@
       font-size: 20px;
       font-weight: 900;
       margin-bottom: 16px !important;
+    }
+    .price_model_opener {
+      margin-top: 20px;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 200px;
+      background-color:  #212529;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      margin-left: 0.3rem;
     }
   }
 
@@ -933,6 +1055,7 @@
   @media (max-width: 767px) {
     .car-wp .goal-btn {
       font-size: 14px !important;
+      margin-left: -0.5rem;
     }
   }
 
@@ -973,7 +1096,7 @@
 
   .car-wp a {
     background-color: #f8f8f8;
-    padding: 23px;
+    padding: 27px;
     border-radius: 15px;
     transition: background-color 0.3s ease-in-out;
   }
@@ -1055,7 +1178,7 @@
 
   @media (max-width: 767px) {
     .car-wp a {
-      padding: 8.5px;
+      padding: 13px;
       border-radius: 10px;
     }
 
@@ -1082,6 +1205,7 @@
     width: 100%;
     border-radius: 16px;
     transition: all 0.3s ease-out 0s;
+    max-height: 531px;
   }
 
   .main-slides > .gallery-slide {
@@ -1092,11 +1216,6 @@
     display: block;
   }
 
-  .previous-slide-button,
-  .next-slide-button,
-  .slides-counter {
-    display: none !important;
-  }
 
   .thumbnail-slides {
     margin-top: 8px;
@@ -1135,7 +1254,7 @@
 
 <script>
   window.onload = (function () {
-    
+
 
     let mainSlides = document.querySelectorAll(".main-slides > .gallery-slide");
     let thumbnailSlidesParent = document.querySelector(".thumbnail-slides");
@@ -1147,7 +1266,7 @@
     let slideCountCurr = document.querySelector(".curr-slide-count");
     let previousSlideButton = document.querySelector(".previous-slide-button");
     let nextSlideButton = document.querySelector(".next-slide-button");
-    
+
 
     // ### Initializing the slider ###
     (function () {
@@ -1292,11 +1411,11 @@
         }
         // console.log(clickedImagePos);
       }
-      
+
     });
 
-      
-    
+
+
     // document.querySelectorAll('.gallery__Image').forEach(
     //   async function(original_img, i , array) {
     //     var img = new Image();
@@ -1308,9 +1427,9 @@
     //       original_img.classList.add("CORRECT");
     //       _count = _count + 1;
     //       changer = original_img.className.replace(/\d+/, _count)
-          
-          
-    //     }		
+
+
+    //     }
     //   }
     //     img.src = original_img.src;
     //   })
@@ -1323,10 +1442,10 @@
     //     original_img.classList.add("CORRECT");
     //     _count = _count + 1;
     //     changer = original_img.className.replace(/\d+/, _count)
-    //   } 	
+    //   }
     // }
 
-    
+
 })();
 </script>
 
@@ -1358,10 +1477,93 @@
 
         // let result = await promise;
         // console.log(result);
-    }) 
- 
+    })
+
 </script>
 
+<script>
+const slides = document.querySelectorAll(".gallery-slide");
+let currentIndex = 0;
+
+const fullscreenImg = document.createElement("img");
+fullscreenImg.classList.add("fullscreen");
+
+const closeButton = document.createElement("button");
+closeButton.classList.add("close-btn");
+closeButton.innerHTML = "&times;";
+
+const prevButton = document.createElement("button");
+prevButton.classList.add("fullscreen-prev-btn");
+prevButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none">
+                <path d="M1.13045 9.38045L9.88045 0.630449C9.96175 0.549152 10.0583 0.484667 10.1645 0.44067C10.2707 0.396671 10.3845 0.374025 10.4995 0.374025C10.6145 0.374025 10.7283 0.396671 10.8345 0.44067C10.9408 0.484667 11.0373 0.549152 11.1186 0.630449C11.1999 0.711746 11.2644 0.80826 11.3084 0.914478C11.3524 1.0207 11.375 1.13454 11.375 1.24951C11.375 1.36448 11.3524 1.47833 11.3084 1.58455C11.2644 1.69077 11.1999 1.78728 11.1186 1.86858L2.98655 9.99951L11.1186 18.1305C11.2828 18.2946 11.375 18.5173 11.375 18.7495C11.375 18.9817 11.2828 19.2044 11.1186 19.3686C10.9544 19.5328 10.7317 19.625 10.4995 19.625C10.2673 19.625 10.0446 19.5328 9.88045 19.3686L1.13045 10.6186C1.0491 10.5373 0.984558 10.4408 0.940524 10.3346C0.89649 10.2284 0.873827 10.1145 0.873827 9.99951C0.873827 9.88452 0.89649 9.77066 0.940524 9.66444C0.984558 9.55822 1.0491 9.46171 1.13045 9.38045Z" fill="white"/>
+              </svg>`;
+
+const nextButton = document.createElement("button");
+nextButton.classList.add("fullscreen-next-btn");
+nextButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none">
+                <path d="M10.8695 10.6195L2.11955 19.3696C2.03825 19.4508 1.94174 19.5153 1.83552 19.5593C1.7293 19.6033 1.61546 19.626 1.50049 19.626C1.38552 19.626 1.27167 19.6033 1.16545 19.5593C1.05923 19.5153 0.96272 19.4508 0.881424 19.3696C0.800127 19.2883 0.735639 19.1917 0.691642 19.0855C0.647645 18.9793 0.625 18.8655 0.625 18.7505C0.625 18.6355 0.647645 18.5217 0.691642 18.4155C0.735639 18.3092 0.800127 18.2127 0.881424 18.1314L9.01346 10.0005L0.881424 1.86955C0.717238 1.70536 0.625 1.48268 0.625 1.25049C0.625 1.01829 0.717238 0.79561 0.881424 0.631424C1.04561 0.467238 1.26829 0.375 1.50049 0.375C1.73268 0.375 1.95536 0.467238 2.11955 0.631424L10.8695 9.38142C10.9509 9.46269 11.0154 9.55919 11.0595 9.66541C11.1035 9.77164 11.1262 9.8855 11.1262 10.0005C11.1262 10.1155 11.1035 10.2293 11.0595 10.3356C11.0154 10.4418 10.9509 10.5383 10.8695 10.6195Z" fill="white"/>
+              </svg>`;
+
+function openFullscreen(index) {
+    currentIndex = index;
+    fullscreenImg.src = slides[currentIndex].src;
+    document.body.appendChild(fullscreenImg);
+    document.body.appendChild(closeButton);
+    document.body.appendChild(prevButton);
+    document.body.appendChild(nextButton);
+
+    closeButton.addEventListener("click", closeFullscreen);
+    fullscreenImg.addEventListener("click", closeFullscreen);
+    prevButton.addEventListener("click", showPrevImage);
+    nextButton.addEventListener("click", showNextImage);
+}
+
+function closeFullscreen() {
+    document.body.removeChild(fullscreenImg);
+    document.body.removeChild(closeButton);
+    document.body.removeChild(prevButton);
+    document.body.removeChild(nextButton);
+}
+
+function showPrevImage() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    fullscreenImg.src = slides[currentIndex].src;
+}
+
+function showNextImage() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    fullscreenImg.src = slides[currentIndex].src;
+}
+
+slides.forEach((slide, index) => {
+    slide.addEventListener("click", () => {
+        const isVisible = window.getComputedStyle(slide).display !== "none";
+
+        if (isVisible) {
+            openFullscreen(index);
+        }
+    });
+});
+</script>
+
+<script>
+    const openPriceModal = (event, text) => {
+    event?.stopPropagation();
+    event?.preventDefault();
+    const modal = document.querySelector('.modal_price_back')
+    modal.style.visibility = 'visible';
+    modal.classList.add('show');
+}
+
+const closePriceModal = () => {
+    const modal = document.querySelector('.modal_price_back')
+    modal.classList.remove('show');
+
+    setTimeout(() => {
+        modal.style.visibility = 'hidden';
+    }, 500);
+}
+</script>
 
 
 {% endblock %}

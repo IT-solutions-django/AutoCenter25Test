@@ -215,16 +215,16 @@
         Реальные отзывы наших клинетов.
       </div>
       <div class="col-3 text-end custom-arrows">
-        <a class="custom-prev-arrow">
+        <p class="custom-prev-arrow">
           <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.46932 17.0306L0.969325 9.53061C0.899593 9.46096 0.844273 9.37824 0.80653 9.28719C0.768787 9.19615 0.749361 9.09855 0.749361 8.99999C0.749361 8.90143 0.768787 8.80383 0.80653 8.71278C0.844273 8.62174 0.899593 8.53902 0.969325 8.46936L8.46932 0.969365C8.61005 0.828634 8.80093 0.749573 8.99995 0.749573C9.19897 0.749573 9.38984 0.828634 9.53057 0.969365C9.67131 1.1101 9.75037 1.30097 9.75037 1.49999C9.75037 1.69901 9.67131 1.88988 9.53057 2.03061L2.56026 8.99999L9.53057 15.9694C9.60026 16.039 9.65553 16.1218 9.69324 16.2128C9.73096 16.3039 9.75037 16.4014 9.75037 16.5C9.75037 16.5985 9.73096 16.6961 9.69324 16.7872C9.65553 16.8782 9.60026 16.9609 9.53057 17.0306C9.46089 17.1003 9.37817 17.1556 9.28712 17.1933C9.19608 17.231 9.09849 17.2504 8.99995 17.2504C8.9014 17.2504 8.80382 17.231 8.71278 17.1933C8.62173 17.1556 8.53901 17.1003 8.46932 17.0306Z" fill="#888888"/>
           </svg>
-        </a>
-        <a class="custom-next-arrow">
+        </p>
+        <p class="custom-next-arrow">
           <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.46932 17.0306L0.969325 9.53061C0.899593 9.46096 0.844273 9.37824 0.80653 9.28719C0.768787 9.19615 0.749361 9.09855 0.749361 8.99999C0.749361 8.90143 0.768787 8.80383 0.80653 8.71278C0.844273 8.62174 0.899593 8.53902 0.969325 8.46936L8.46932 0.969365C8.61005 0.828634 8.80093 0.749573 8.99995 0.749573C9.19897 0.749573 9.38984 0.828634 9.53057 0.969365C9.67131 1.1101 9.75037 1.30097 9.75037 1.49999C9.75037 1.69901 9.67131 1.88988 9.53057 2.03061L2.56026 8.99999L9.53057 15.9694C9.60026 16.039 9.65553 16.1218 9.69324 16.2128C9.73096 16.3039 9.75037 16.4014 9.75037 16.5C9.75037 16.5985 9.73096 16.6961 9.69324 16.7872C9.65553 16.8782 9.60026 16.9609 9.53057 17.0306C9.46089 17.1003 9.37817 17.1556 9.28712 17.1933C9.19608 17.231 9.09849 17.2504 8.99995 17.2504C8.9014 17.2504 8.80382 17.231 8.71278 17.1933C8.62173 17.1556 8.53901 17.1003 8.46932 17.0306Z" fill="#888888"/>
           </svg>
-        </a>
+        </p>
       </div>
     </div>
     <div class="marg-row reviews-slider">
@@ -233,7 +233,11 @@
         <div class="review">
           <div class="d-flex flex-row">
             <div class="review-img">
-              <img src="/media/{{review.icon_user}}" class="review-img" alt="review">
+              {% if review.icon_user %}
+              <img src="{{review.icon_user}}" class="review-img" alt="user-icon" loading="lazy">
+              {% else %}
+              <img src="/media/user/phoro_user/0c3c22da-32c9-11ef-a698-31ca6a59cdec.webp" class="review-img" alt="user-icon" loading="lazy">
+              {% endif %}
             </div>
             <div class="client-info">
               <p style="margin-bottom: 4px;">{{review.name}}</p>
@@ -248,15 +252,15 @@
           </div>
           <div class="client-text" id="review-{{review.num_view}}">
             <div class="row row-cols-2" style="margin-bottom: 10px; margin-top: 10px;">
-              {% if review.image1 != "нет фото" %}
+              {% if review.image1 %}
               <div class="col review-photo">
-                <img src="{{review.image1}}">
+                  <img src="{{review.image1}}" loading="lazy" alt="review-photo-1">
               </div>
               {% endif %}
 
-              {% if review.image2 != "нет фото" %}
+              {% if review.image2 %}
               <div class="col review-photo">
-                <img src="{{review.image2}}">
+                  <img src="{{review.image2}}" loading="lazy" alt="review-photo-2">
               </div>
               {% endif %}
             </div>

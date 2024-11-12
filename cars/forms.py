@@ -279,8 +279,6 @@ class CarKoreaFilterForm(CarFilterForm):
 
         self.fields["model"].choices = [("", "Любое")]
 
-        self.fields["transmission"].choices = [("", "Любое"), (2, 'Автомат'), (1, 'Механика')]
-
         privods = Privod.objects.all().values_list('id', 'name')
 
         self.fields["drive"].choices = [("", "Любое")] + list(privods)

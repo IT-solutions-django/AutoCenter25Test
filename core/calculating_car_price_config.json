@@ -1,8 +1,14 @@
 {
   "table_settings": {
-    "stats": {"commission": 0, "currency": "jpy"},
-    "china": {"commission": 0, "currency": "cny"},
-    "main": {"commission": 0, "currency": "krw"}
+    "stats": {
+      "currency": "jpy"
+    },
+    "china": {
+      "currency": "cny"
+    },
+    "korea": {
+      "currency": "kor"
+    }
   },
   "car_tof": [
     {"price_interval": [0, 200000], "tof": 775},

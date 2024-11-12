@@ -59,7 +59,7 @@
   }
 
   @media (max-width: 767px) {
-    .form-wp h5 {
+    .form-wp p {
       font-size: 18px;
     }
   }
@@ -718,6 +718,7 @@ header button {
     border-radius: 20px;
     object-fit: cover;
     max-height: 272px;
+    height: 230px;
 }
 
 .auto-card h3 {
@@ -783,6 +784,9 @@ header button {
     .auto-card .car-info {
         padding: 12px;
     }
+    .auto-card img {
+        height: 272px;
+    }
 }
 
 
@@ -798,6 +802,117 @@ header button {
 
 
 /*------ China and Korea ---------*/
+
+.modal_price_back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.modal_price_back.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.modal_price {
+  transform: translateY(-20px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal_price.show .modal_form {
+  transform: translateY(0); /* Возвращаем в исходное положение */
+}
+
+.modal_price {
+  margin-top: 40px;
+}
+
+.modal_price .cont {
+  padding: 40px;
+  min-height: 200px;
+  background-color: #f8f8f8;
+  border-radius: 28px;
+  color: black;
+}
+
+.modal_price .title {
+  padding-left: 5px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.modal_price table {
+  width: 100%;
+  border-spacing: 20px;
+}
+
+.modal_price table td {
+  padding-inline: 5px;
+  padding-top: 15px;
+}
+
+.modal_price table td:first-of-type {
+  width: 70%;
+}
+
+.modal_price table td:last-of-type {
+  text-align: right;
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.modal_price table td.price {
+  font-size: 22px;
+}
+
+.modal_price table td span {
+  font-size: 14px;
+}
+
+.modal_price .currency {
+  font-size: 14px;
+  padding-top: 20px;
+  padding-inline: 5px;
+  display: flex;
+  justify-content: space-between;
+  color: #808980;
+}
+
+.modal_price_back .top {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-bottom: 10px;
+}
+
+.modal_price_back .top button {
+  border: none;
+  outline: none;
+  background: grey;
+  border-radius: 30px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_price_back .top button img {
+  width: 14px;
+  height: 14px;
+}
 
 
 .other-country .overlay {
@@ -909,7 +1024,7 @@ header button {
     border-radius: 20px;
 }
 
-.scheme .scheme-text h4 {
+.scheme .scheme-text h3 {
     font-size: 24px;
     font-weight: 700;
     line-height: 29.05px;
@@ -925,7 +1040,7 @@ header button {
 }
 
 @media (max-width: 1200px) {
-    .scheme .scheme-text h4 {
+    .scheme .scheme-text h3 {
         font-size: 20px;
     }
 
@@ -935,7 +1050,7 @@ header button {
 }
 
 @media (max-width: 750px) {
-    .scheme .scheme-text h4 {
+    .scheme .scheme-text h3 {
         font-size: 16px;
     }
     .scheme .scheme-text p {
@@ -1153,7 +1268,7 @@ header button {
 
 
 
-.custom-arrows a {
+.custom-arrows p {
     width: 48.79px;
     height: 48px;
     padding: 12px;
@@ -1164,11 +1279,11 @@ header button {
     text-align: center;
 }
 
-.custom-arrows a:hover {
+.custom-arrows p:hover {
     cursor: pointer;
 }
 
-.custom-arrows a:hover svg path {
+.custom-arrows p:hover svg path {
     fill: #EB1C24;
 }
 
@@ -1409,7 +1524,7 @@ header button {
     border-radius: 20px;
 }
 
-.advantage-body .advantage-info h4 {
+.advantage-body .advantage-info h3 {
     font-size: 18px;
     font-weight: 700;
     color: #191919;
@@ -1577,7 +1692,7 @@ header button {
     padding: 40px !important;
 }
 
-.form-wp h5 {
+.form-wp p {
     font-size: 24px;
     font-weight: 900;
     color: #191919;
@@ -2097,7 +2212,7 @@ header button {
     color: #757575;
 }
 
-.catalog .filter .dropdown .filter-item:active, .catalog .filter .dropdown .filter-item:focus {
+.catalog .filter .dropdown .filter-item:hover {
     border: 1px solid #C4C4C4;
 }
 

@@ -151,19 +151,20 @@ class CarMainPage(models.Model):
     year = models.IntegerField(
         verbose_name=_("Год"), help_text=_("Впишите год автомабиля")
     )
-    transmission = models.CharField(
-        max_length=150, verbose_name=_("Тип КПП"),
-        help_text=_("Автомат или Механика")
+    transmission = models.ForeignKey(
+        "Transmission", on_delete=models.CASCADE,
+        verbose_name=_("Тип КПП"),
+        help_text=_("Впишите тип КПП")
     )
     engine_volume = models.IntegerField(
         verbose_name=_("Объяем двигателя"),
         help_text=_("Впишите объяем двигателя"),
     )
     drive = models.ForeignKey(
-        "Privod", on_delete=models.CASCADE, verbose_name=_("Тип привода")
+        "Drive", on_delete=models.CASCADE, verbose_name=_("Тип привода")
     )
     color = models.ForeignKey(
-        Color, on_delete=models.CASCADE, verbose_name=_("Цвет")
+        "ColorMainPageCars", on_delete=models.CASCADE, verbose_name=_("Цвет")
     )
     mileage = models.IntegerField()
     price = models.IntegerField()
@@ -356,3 +357,115 @@ class BaseFilter(models.Model):
 
     def __str__(self):
         return self.country
+
+
+class BodyType(models.Model):
+    name = models.CharField(
+        max_length=100,
+        verbose_name='тип кузова'
+    )
+
+    class Meta:
+        verbose_name = "тип кузова"
+        verbose_name_plural = "типы кузова"
+
+    def __str__(self):
+        return self.name
+
+
+class ColorMainPageCars(models.Model):
+    name = models.CharField(
+        max_length=100,
+        verbose_name='цвет'
+    )
+
+    class Meta:
+        verbose_name = "цвет для популярных машин"
+        verbose_name_plural = "цвета для популярных машин"
+
+    def __str__(self):
+        return self.name
+
+
+class Drive(models.Model):
+    name = models.CharField(
+        max_length=100,
+        verbose_name='привод'
+    )
+
+    class Meta:
+        verbose_name = "привод для популярных машин"
+        verbose_name_plural = "приводы для популярных машин"
+
+    def __str__(self):
+        return self.name
+
+
+class Transmission(models.Model):
+    name = models.CharField(
+        max_length=100,
+        verbose_name='тип кпп'
+    )
+
+    class Meta:
+        verbose_name = "тип кпп для популярных машин"
+        verbose_name_plural = "типы кпп для популярных машин"
+
+    def __str__(self):
+        return self.name
+
+
+class TypeEngine(models.Model):
+    name = models.CharField(
+        max_length=100,
+        verbose_name='тип двигателя'
+    )
+
+    class Meta:
+        verbose_name = "тип двигателя для популярных машин"
+        verbose_name_plural = "типы двигателей для популярных машин"
+
+    def __str__(self):
+        return self.name
+
+
+class CarKorea(models.Model):
+    class Meta:
+        verbose_name = "Авто Корея"
+        verbose_name_plural = "Авто Корея"
+
+    brand = models.CharField(
+        max_length=100,
+        verbose_name=_("Бренд"),
+        help_text=_("Впишите название бренда"),
+    )
+    model = models.CharField(
+        max_length=150,
+        verbose_name=_("Модель"),
+        help_text=_("Впишите название модели"),
+    )
+    year = models.IntegerField(
+        verbose_name=_("Год"), help_text=_("Впишите год автомабиля")
+    )
+    engine_volume = models.IntegerField(
+        verbose_name=_("Объяем двигателя"),
+        help_text=_("Впишите объяем двигателя"),
+    )
+    drive = models.ForeignKey(
+        "Drive", on_delete=models.CASCADE, verbose_name=_("Тип привода")
+    )
+    color = models.ForeignKey(
+        "ColorMainPageCars", on_delete=models.CASCADE, verbose_name=_("Цвет")
+    )
+    mileage = models.IntegerField()
+    price = models.IntegerField()
+
+    photos = models.ManyToManyField(
+        PhotoCars, null=True, verbose_name=_("Фотографии авто")
+    )
+
+    def __str__(self):
+        return f"{self.brand} {self.model} ({self.year}) {self.color} - {self.price}"
+
+    def get_absolute_url(self):
+        return reverse("car_main_page/", kwargs={"pk": self.pk})

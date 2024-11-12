@@ -72,3 +72,33 @@ class UniqueColorAdmin(admin.ModelAdmin):
 @admin.register(BaseFilter)
 class UniqueColorAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(BodyType)
+class BodyTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ColorMainPageCars)
+class ColorMainPageCarsAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Drive)
+class DriveAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Transmission)
+class TransmissionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(TypeEngine)
+class TypeEngineAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CarKorea)
+class CarKoreaAdmin(admin.ModelAdmin):
+    pass

@@ -16,7 +16,9 @@
       "white violet",
       "leaf white",
       "taffeta white",
-      "premium white"
+      "premium white",
+      "WHITE",
+      "PEARL WHITE"
     ]
   },
   {
@@ -36,7 +38,8 @@
       "black-white",
       "dark",
       "dark brown",
-      "dark cherry"
+      "dark cherry",
+      "BLACK"
     ]
   },
   {
@@ -50,7 +53,8 @@
       "b black",
       "maroon brown",
       "dark brown",
-      "brown pearl"
+      "brown pearl",
+      "BROWN"
     ]
   },
   {
@@ -62,7 +66,8 @@
       "lilac silver",
       "lavender",
       "dark violet",
-      "mauve"
+      "mauve",
+      "PURPLE"
     ]
   },
   {
@@ -79,7 +84,8 @@
       "yellow-green",
       "green two-tone",
       "mint green",
-      "green/white"
+      "green/white",
+      "GREEN"
     ]
   },
   {
@@ -93,7 +99,8 @@
       "dark gray 2",
       "platinum gray",
       "charcoal",
-      "grey pearl"
+      "grey pearl",
+      "GREY"
     ]
   },
   {
@@ -108,7 +115,8 @@
       "cool silver",
       "mint silver",
       "ceramic metallic",
-      "aluminum"
+      "aluminum",
+      "SILVER"
     ]
   },
   {
@@ -128,7 +136,9 @@
       "blue metal",
       "blue-white",
       "blue-silver",
-      "blue acme shubu"
+      "blue acme shubu",
+      "DARK BLUE CHAMELEON",
+      "BLUE"
     ]
   },
   {
@@ -141,7 +151,8 @@
       "champagne",
       "champagne metallic",
       "beige-grey",
-      "beige/white"
+      "beige/white",
+      "BEIGE"
     ]
   },
   {
@@ -182,7 +193,9 @@
       "red-grey",
       "red-black",
       "red-white",
-      "red metallic"
+      "red metallic",
+      "RED TWO-TONE",
+      "RED"
     ]
   },
   {
@@ -216,7 +229,8 @@
       "orange 2",
       "peach",
       "yellow-blue-orange",
-      "orange two-tone"
+      "orange two-tone",
+      "ORANGE"
     ]
   }
 ]

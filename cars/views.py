@@ -7,6 +7,7 @@ from .base_view import (
     FilteredCarListView,
     CarDetailView,
     CarKoreaMainView, generate_default_filter,
+    FilteredCarKoreaListView
 )
 from .forms import *
 import asyncio
@@ -14,6 +15,8 @@ from django.views.decorators.http import require_GET
 from cars.currency import start_process
 from cars.get_json_api import get_car
 from utils.get_user_ip import get_user_ip
+from about.models import About
+from selection.models import Selection
 
 asyncio.run(start_process())
 
@@ -111,7 +114,13 @@ def sitemap(request):
 
 
 def main(request):
-    cars = CarMainPage.objects.all()[:4]
+    cars = CarMainPage.objects.all().select_related('transmission', 'drive').prefetch_related('photos')
+    tags_drive = PrivodTag.objects.all().select_related('privod')
+    tags_drive_dict = {tag_drive.name: tag_drive.privod.name for tag_drive in tags_drive}
+
+    for car in cars:
+        if car.drive.name in tags_drive_dict:
+            car.drive.name = tags_drive_dict[car.drive.name]
 
     data = {"feedbackForm": FeedbackForm(), "cars": cars,
             "reviews": Reviews.objects.all()}
@@ -119,12 +128,22 @@ def main(request):
 
 
 def about_us(request):
-    data = {"feedbackForm": FeedbackForm()}
+    data_about = About.objects.first()
+    data = {
+        "feedbackForm": FeedbackForm(),
+        "data_about": data_about,
+    }
     return render(request, "main/about_us.html", data)
 
 
 def additional_services(request):
-    data = {"feedbackForm": FeedbackForm(), "reviews": Reviews.objects.all()}
+    category_1 = "Качестенный автоподбор и осмотр с независимой оценкой."
+    data_1 = Selection.objects.filter(category__name=category_1)
+    data = {
+        "feedbackForm": FeedbackForm(),
+        "reviews": Reviews.objects.all(),
+        "data_1": data_1
+    }
     return render(request, "main/additional_services.html", data)
 
 
@@ -187,15 +206,17 @@ class CarsChina(FilteredCarListView):
     car_link = "car_china"
     table = "china"
     url_api = "/api/cars/china/"
+    from_routing = 'Китая'
 
 
-class CarsKorea(FilteredCarListView):
+class CarsKorea(FilteredCarKoreaListView):
     form_filter = CarKoreaFilterForm
     link_url = "car_list_korea"
     title = "Каталог авто из Кореи"
     car_link = "car_korea"
     url_api = "/api/cars/korea/"
     table = 'main'
+    from_routing = 'Кореи'
 
 
 class CarsJapan(FilteredCarListView):
@@ -205,27 +226,38 @@ class CarsJapan(FilteredCarListView):
     table = "stats"
     car_link = "car_japan"
     url_api = "/api/cars/japan/"
+    from_routing = 'Японии'
 
 
 class CarMainDetailView(CarKoreaMainView):
     model = CarMainPage
     slug_field = "pk"
     slug_url_kwarg = "pk"
+    country = "Япония"
+    from_routing = "Японии"
+    from_routing_url = "cars_japan"
 
 
 class CarChinaDetailView(CarDetailView):
     slug_field = "api_id"
     slug_url_kwarg = "api_id"
     country = "Китай"
+    from_routing = "Китая"
+    from_routing_url = "cars_china"
 
 
 class CarJapanDetailView(CarDetailView):
     slug_field = "api_id"
     slug_url_kwarg = "api_id"
     country = "Япония"
+    from_routing = "Японии"
+    from_routing_url = "cars_japan"
 
 
-class CarKoreaDetailView(CarDetailView):
-    slug_field = "api_id"
-    slug_url_kwarg = "api_id"
+class CarKoreaDetailView(CarKoreaMainView):
+    model = CarKorea
+    slug_field = "pk"
+    slug_url_kwarg = "pk"
     country = "Корея"
+    from_routing = "Кореи"
+    from_routing_url = "cars_korea"

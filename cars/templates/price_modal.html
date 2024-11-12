@@ -1,0 +1,91 @@
+{% load static %}
+{% load price_filters %}
+
+<div class="modal_price_back" onclick="closePriceModal()">
+    <div class="modal_price" onclick="event.stopPropagation()">
+        <div class="top">
+            <button class="close" onclick="closePriceModal()"><img src="{% static 'img/close.svg' %}" alt="Закрыть"></button>
+        </div>
+        <div class="cont">
+            <div class="title">Полная стоимость авто</div>
+            <table>
+                <tr>
+                    <td>Средняя стоимость автомобиля во Владивостоке со всеми расходами:</td>
+                    <td class="price">{{ car.price|format_price }} ₽</td>
+                </tr>
+                <tr>
+                    {% if country == 'Япония' %}
+                        <td>Стоимость авто в Японии:</td>
+                        <td>{{ car.finish_price|multiply:car.currency.jpy|format_price }} ₽<br><span>{{ car.finish_price|format_price }} ¥</span></td>
+                    {% elif country == 'Китай' %}
+                        <td>Стоимость авто в Китае:</td>
+                        <td>{{ car.finish_price|multiply:car.currency.cny|format_price }} ₽<br><span>{{ car.finish_price|format_price }} ¥</span></td>
+                    {% else %}
+                        <td>Стоимость авто в Корее:</td>
+                        <td>{{ car.finish_price|multiply:car.currency.krw|format_price }} ₽<br><span>{{ car.finish_price|format_price }} ₩</span></td>
+                    {% endif %}
+                </tr>
+                {% if country == 'Япония' and car.eng_v > 1.8 %}
+                    <td>Надбавка {{ car.commission.japan_sanction_percent }}% от стоимости на аукционе:</td>
+                    <td>{{ car.finish_price|multiply:car.currency.jpy|percentage:car.commission.japan_sanction_percent|format_price }} ₽<br><span>{{ car.finish_price|percentage:car.commission.japan_sanction_percent|format_price }} ¥</span></td>
+                {% endif %}
+                <tr>
+                    {% if country == 'Япония' %}
+                        <td>Расходы по Японии и Фрахт (усредненное значение):</td>
+                    {% elif country == 'Китай' %}
+                        <td>Расходы по Китаю (усредненное значение):</td>
+                    {% else %}
+                        <td>Расходы по Корее и Фрахт (усредненное значение)</td>
+                    {% endif %}
+                    {% if country == 'Япония' and car.eng_v > 1.8  %}
+                        <td>{{ car.commission.japan_sanction_commission|multiply:car.currency.jpy|format_price }} ₽<br><span>{{ car.commission.japan_sanction_commission|format_price }} ¥</span></td>
+                    {% elif country == 'Корея' and car.finish_price > 30000000 %}
+                        <td>{{ car.commission.korea_sanction_commission|multiply:car.currency.krw|format_price }} ₽<br><span>{{ car.commission.korea_sanction_commission|format_price }} ₩</span></td>
+                    {% else %}
+                    {% if country == 'Япония' %}
+                     <td>{{ car.commission.commission_delivery|multiply:car.currency.jpy|format_price }} ₽<br><span>{{ car.commission.commission_delivery|format_price }} ¥</span></td>
+                    {% elif country == 'Китай' %}
+                     <td>{{ car.commission.commission_delivery|multiply:car.currency.cny|format_price }} ₽<br><span>{{ car.commission.commission_delivery|format_price }} ¥</span></td>
+                    {% else %}
+                     <td>{{ car.commission.commission_delivery|multiply:car.currency.krw|format_price }} ₽<br><span>{{ car.commission.commission_delivery|format_price }} ₩</span></td>
+                    {% endif %}
+                    {% endif %}
+
+                </tr>
+                <tr>
+                    <td>Склад, ЭПТС СБКТС, Услуга оформления:</td>
+                    <td>{{ car.commission.commission_storage|format_price }} ₽</td>
+                </tr>
+                <tr>
+                    <td>Перегон и сопутствующие регистрации:</td>
+                    <td>{{ car.commission.commission_broker|format_price }} ₽</td>
+                </tr>
+                <tr>
+                    <td>Комиссия:</td>
+                    <td>{{ car.commission.commission|format_price }} ₽</td>
+                </tr>
+                <tr>
+                    <td>Таможенные платежи:<br>
+                    <span>Сборы за таможенное оформление: {{ car.customs_duty.0|format_price }} ₽</span><br>
+                    <span>Единая ставка: {{ car.customs_duty.1|format_price }} ₽</span>
+                    </td>
+                    <td>{{ car.customs_duty.0|add:car.customs_duty.1|format_price }} ₽</td>
+                </tr>
+                <tr>
+                    <td>Утилизационный сбор:</td>
+                    <td>{{ car.customs_duty.2|format_price }} ₽</td>
+                </tr>
+            </table>
+            <div class="currency">
+                <div>Актуальный курс валют:</div>
+                {% if country == 'Япония' %}
+                <div>1€ - {{ car.currency.eur }} (ЦБ) | 1$ - {{ car.currency.usd }} (ЦБ) | 1¥ - {{ car.currency.jpy }}</div>
+                {% elif country == 'Китай' %}
+                <div>1€ - {{ car.currency.eur }} (ЦБ) | 1$ - {{ car.currency.usd }} (ЦБ) | 1¥ - {{ car.currency.cny }}</div>
+                {% else %}
+                <div>1€ - {{ car.currency.eur }} (ЦБ) | 1$ - {{ car.currency.usd }} (ЦБ) | 1₩ - {{ car.currency.krw }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

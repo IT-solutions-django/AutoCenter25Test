@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import *
 from .view_api import car_china, car_main, car_korea
+from django.views.decorators.cache import cache_page
 
 
 urlpatterns_api = [
@@ -22,21 +23,21 @@ urlpatterns_api = [
 ]
 
 urlpatterns = [
-    path("", main, name="main"),
+    path("", cache_page(60 * 30)(main), name="main"),
     path("feedback/", sendFeedBack, name="send_feed_back"),
-    path("cars_korea/", CarsKorea.as_view(), name="car_list_korea"),
-    path("cars_china/", CarsChina.as_view(), name="car_list_china"),
-    path("cars_japan/", CarsJapan.as_view(), name="car_list_japan"),
+    path("cars_korea/", cache_page(60 * 30)(CarsKorea.as_view()), name="car_list_korea"),
+    path("cars_china/", cache_page(60 * 30)(CarsChina.as_view()), name="car_list_china"),
+    path("cars_japan/", cache_page(60 * 30)(CarsJapan.as_view()), name="car_list_japan"),
     path(
         "car_china/<str:api_id>",
-        CarChinaDetailView.as_view(),
+        cache_page(60 * 30)(CarChinaDetailView.as_view()),
         name="car_china",
     ),
-    path("car_korea/<str:api_id>", CarKoreaDetailView.as_view(), name="car_korea"),
-    path("cars/<int:pk>", CarMainDetailView.as_view(), name="car_main"),
+    path("car_korea/<int:pk>", cache_page(60 * 30)(CarKoreaDetailView.as_view()), name="car_korea"),
+    path("cars/<int:pk>", cache_page(60 * 30)(CarMainDetailView.as_view()), name="car_main"),
     path(
         "car_japan/<str:api_id>",
-        CarJapanDetailView.as_view(),
+        cache_page(60 * 30)(CarJapanDetailView.as_view()),
         name="car_japan",
     ),
     path("about_us/", about_us, name="about_us"),
