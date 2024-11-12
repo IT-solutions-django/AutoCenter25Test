@@ -10,6 +10,7 @@ services:
     volumes:
       - ./media:/usr/src/app/media
       - ./staticfiles:/usr/src/app/staticfiles
+      - db-data:/usr/src/app/db
 
   redis:
      image: redis
@@ -29,6 +30,7 @@ services:
      volumes:
        - .:/usr/src/app
        - ./media:/usr/src/app/media
+       - db-data:/usr/src/app/db
      links:
        - redis
 
@@ -41,6 +43,7 @@ services:
      volumes:
        - .:/usr/src/app
        - ./media:/usr/src/app/media
+       - db-data:/usr/src/app/db
      links:
        - redis
 
@@ -57,3 +60,5 @@ services:
     depends_on:
       - backend
 
+volumes:
+  db-data: {}
