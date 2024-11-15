@@ -12,7 +12,6 @@ from .base_view import (
 from .forms import *
 import asyncio
 from django.views.decorators.http import require_GET
-from cars.currency import start_process
 from cars.get_json_api import get_car
 from utils.get_user_ip import get_user_ip
 from about.models import About
