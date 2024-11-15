@@ -17,8 +17,6 @@ from utils.get_user_ip import get_user_ip
 from about.models import About
 from selection.models import Selection
 
-asyncio.run(start_process())
-
 
 @require_GET
 def robots_txt(request):
