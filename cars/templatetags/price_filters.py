@@ -16,3 +16,11 @@ def multiply(value, arg):
 @register.filter
 def percentage(value, perc):
     return float(value) / 100 * perc
+
+
+@register.filter
+def round_to_two(value):
+    try:
+        return '{:.2f}'.format(float(value)).replace('.', ',')
+    except (ValueError, TypeError):
+        return value

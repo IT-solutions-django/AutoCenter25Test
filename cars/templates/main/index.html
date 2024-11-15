@@ -52,7 +52,7 @@
           </div>
       </div>
 	  
-	  <div class="marg-row row row-cols-2 row-cols-lg-3 row-cols-xl-4">
+	  <div class="marg-row row row-cols-1 row-cols-lg-3 row-cols-xl-4">
 		{% for car in cars %}
 		<div class="col">
               <div class="auto-card">
@@ -62,7 +62,7 @@
                   <div class="car-info">
                       <h3 class="my-0">{{car.brand}} {{car.model}}</h3>
                       <p>{{car.year}} • {{car.engine_volume|engine_volume_format}} л • {{car.drive}} • {{car.transmission}}</p>
-                      <div class="d-flex flex-sm-row flex-column justify-content-between align-items-sm-center align-items-start">
+                      <div class="d-flex justify-content-between align-items-center adapt-auto-info">
                           <span class="mb-sm-0 mb-2">{{car.price|intspace}} ₽</span>
                           <button class="btn submit-app"  data-bs-toggle="modal" data-bs-target="#mainFeedBackModal" onclick="setModalInput('Я заинтересовался автомобилем {{car.brand}} {{car.model}} {{car.year}}')">Оставить заявку</button>
                       </div>

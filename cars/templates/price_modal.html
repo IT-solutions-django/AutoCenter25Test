@@ -79,7 +79,7 @@
             <div class="currency">
                 <div>Актуальный курс валют:</div>
                 {% if country == 'Япония' %}
-                <div>1€ - {{ car.currency.eur }} (ЦБ) | 1$ - {{ car.currency.usd }} (ЦБ) | 1¥ - {{ car.currency.jpy }}</div>
+                <div>1€ - {{ car.currency.eur }} (ЦБ) | 1$ - {{ car.currency.usd }} (ЦБ) | 1¥ - {{ car.currency.jpy|round_to_two }}</div>
                 {% elif country == 'Китай' %}
                 <div>1€ - {{ car.currency.eur }} (ЦБ) | 1$ - {{ car.currency.usd }} (ЦБ) | 1¥ - {{ car.currency.cny }}</div>
                 {% else %}

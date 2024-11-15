@@ -354,6 +354,19 @@
   .asyncGallery__Prev {
     display: none;
   }
+
+  .previous-slide-button {
+        left: 0;
+  }
+  .next-slide-button {
+        right: 0;
+  }
+  .fullscreen-prev-btn {
+    left: 0;
+  }
+  .fullscreen-next-btn {
+    right: 0;
+  }
 }
 
 </style>
@@ -900,7 +913,7 @@
         {% endif %}
 
 		{% if country == "Корея" %}
-        <a href="/cars/{{car_rec.api_id}}">
+        <a href="/car_korea/{{car_rec.id}}">
           <img src="/media/{{car_rec.photos.all.0}}" alt="car" />
         </a>
         {% endif %}
@@ -1225,7 +1238,7 @@
 
   .thumbnail-slides > img {
     width: 100px;
-    height: 80px;
+    height: 100px;
     cursor: pointer;
     margin-right: 1px;
     margin-left: 1px;
@@ -1248,6 +1261,9 @@
   @media (max-width: 767px) {
     .car-promotion {
       margin-bottom: 24px;
+    }
+    .main-slides img {
+        max-height: 300px;
     }
   }
 </style>

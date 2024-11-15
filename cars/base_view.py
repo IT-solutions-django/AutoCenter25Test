@@ -26,6 +26,17 @@ ORDERING = {
     "desc_auc_date": "ORDER+BY+AUCTION_DATE+DESC+",
 }
 
+ORDERING_KOREA = {
+    "asc_mileage": "mileage",
+    "desc_mileage": "-mileage",
+    "asc_price": "price",
+    "desc_price": "-price",
+    "asc_eng_v": "engine_volume",
+    "desc_eng_v": "-engine_volume",
+    "asc_year": "year",
+    "desc_year": "-year",
+}
+
 
 def generate_default_filter(country):
     base_filter = BaseFilter.objects.get(country=country)
@@ -479,7 +490,7 @@ class FilteredCarKoreaListView(BaseListView, TemplateResponseMixin):
 
         if get_params.get("ordering"):
             now_ordering = get_params.get("ordering")
-            cars = CarKorea.objects.filter(self.filter).order_by(ORDERING[now_ordering])
+            cars = CarKorea.objects.filter(self.filter).order_by(ORDERING_KOREA[now_ordering])
         else:
             now_ordering = ''
             cars = CarKorea.objects.filter(self.filter)
@@ -527,14 +538,6 @@ class FilteredCarKoreaListView(BaseListView, TemplateResponseMixin):
             ("asc_year", "Год: по возрастанию"),
             ("desc_year", "Год: по убыванию"),
         ]
-
-        if self.table == "stats":
-            ordering_params.extend(
-                [
-                    ("asc_auc_date", "Дата аукциона: по возрастанию"),
-                    ("desc_auc_date", "Дата аукциона: по убыванию"),
-                ]
-            )
 
         ordering_params_dict = {key: value for key, value in ordering_params}
         ordering_params_dict[""] = ""
